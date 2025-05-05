@@ -1,0 +1,190 @@
+/*
+* demo.css
+* File include item demo only specific css only
+******************************************************************************/
+
+.theme-toggler {
+    align-self: center;
+    background: #d7e7e7;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    height: 10px;
+    margin-left: 5px;
+    margin-right: 1rem;
+    position: relative;
+    width: 36px
+}
+
+.theme-toggler input {
+    opacity: 0;
+}
+
+.theme-toggler .moon {
+    display: none
+}
+
+.theme-toggler span.text {
+    background-color: transparent;
+    display: block;
+    overflow: hidden;
+    text-indent: -6000em
+}
+
+.theme-toggler span.icon {
+    background: #000;
+    border-radius: 12px;
+    color: #fff;
+    display: block;
+    height: 24px;
+    left: -1px;
+    position: absolute;
+    top: -7px;
+    transition: left .5s;
+    width: 24px
+}
+
+.theme-toggler span.icon svg {
+    box-sizing: content-box;
+    height: 1em;
+    overflow: visible
+}
+
+.theme-toggler span.icon .moon {
+    margin-left: 7px;
+    margin-top: 5px
+}
+
+.theme-toggler span.icon .sun {
+    margin-left: 5px;
+    margin-top: 5px
+}
+
+.theme-toggler.active {
+    background: #41464b
+}
+
+.theme-toggler.active span.icon {
+    background: #fff;
+    color: #000;
+    left: 14px
+}
+
+.theme-toggler.active span.icon .sun {
+    display: none
+}
+
+.theme-toggler.active span.icon .moon {
+    display: block
+}
+
+@media screen and (max-width: 1024px) {
+    .theme-toggler {
+        position:absolute;
+        right: 0;
+        top: 90px
+    }
+}
+
+.menu .app-brand.demo {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.app-brand-logo.demo img {
+  height: 70px;
+}
+
+.app-brand-text.demo {
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  text-transform: lowercase;
+}
+
+/* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
+/* Detached navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+  padding-top: 76px !important;
+}
+/* Default navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+  padding-top: 64px !important;
+}
+
+/* Navbar page z-index issue solution */
+.content-wrapper .navbar {
+  z-index: auto;
+}
+
+/*
+* Content
+******************************************************************************/
+
+.demo-blocks > * {
+  display: block !important;
+}
+
+.demo-inline-spacing > * {
+  margin: 1rem 0.375rem 0 0 !important;
+}
+
+/* ? .demo-vertical-spacing class is used to have vertical margins between elements. To remove margin-top from the first-child, use .demo-only-element class with .demo-vertical-spacing class. For example, we have used this class in forms-input-groups.html file. */
+.demo-vertical-spacing > * {
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-lg > * {
+  margin-top: 1.875rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-lg.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-xl > * {
+  margin-top: 5rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-xl.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.rtl-only {
+  display: none !important;
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+[dir='rtl'] .rtl-only {
+  display: block !important;
+}
+
+/*
+* Layout demo
+******************************************************************************/
+
+.layout-demo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.layout-demo-placeholder img {
+  width: 900px;
+}
+.layout-demo-info {
+  text-align: center;
+  margin-top: 1rem;
+}

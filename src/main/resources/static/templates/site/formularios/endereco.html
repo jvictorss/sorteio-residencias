@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head></head>
+<body>
+    <section th:fragment="formulario">
+        <form id="form3" method="post" th:action="@{/site/back/endereco}" class="was-validated" th:object="${enderecoEntity}">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <input type="hidden" id="id_cidadao" name="id_cidadao" th:value="${idCidadao}">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="cep" class="form-label">CEP:</label>
+                    <input type="text" th:errorclass="error" class="form-control cep" id="cep" name="cep" th:field="*{cep}" required>
+                    <label th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" id="cep-error" for="cep" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 mb-3">
+                    <label for="logradouro" class="form-label">Logradouro:</label>
+                    <input type="text" th:errorclass="error" class="form-control" id="logradouro" name="logradouro" th:field="*{logradouro}" required>
+                    <label th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" for="logradouro" id="logradouro-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="numero" class="form-label">Número:</label>
+                    <input type="text" th:errorclass="error" class="form-control" id="numero" name="numero" th:field="*{numero}" required>
+                    <label th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" for="numero" id="numero-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="bairro" class="form-label">Bairro:</label>
+                    <input type="text" th:errorclass="error" class="form-control" id="bairro" name="bairro" th:field="*{bairro}" required>
+                    <label th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" id="bairro-error" for="bairro" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="localidade" class="form-label">Localidade:</label>
+                    <input type="text" th:errorclass="error" class="form-control" id="localidade" name="localidade" value="Serra Talhada" th:field="*{localidade}" required>
+                    <label th:if="${#fields.hasErrors('localidade')}" th:errors="*{localidade}" for="localidade" id="localidade-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="uf" class="form-label">UF:</label>
+                    <select class="form-select" th:errorclass="error" id="uf" name="uf" th:field="*{uf}" required>
+                        <option value="" selected>Selecione uma opção</option>
+                        <option th:each="estado : ${T(gov.residenciais.enuns.EstadosEnum).values()}"
+                                th:value="${estado}"
+                                th:text="${estado.descricao}">
+                    </select>
+                    <label th:if="${#fields.hasErrors('uf')}" th:errors="*{uf}" id="uf-error" for="uf" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="referencia" class="form-label">Ponto de Referência:</label>
+                    <input type="text" th:errorclass="error" class="form-control" id="referencia" name="referencia" th:field="*{referencia}" required>
+                    <label th:if="${#fields.hasErrors('referencia')}" th:errors="*{referencia}" for="referencia" id="referencia-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+            </div>
+            <h3>Contato</h3>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="celular1" class="form-label">Celular 01:</label>
+                    <input type="text" th:errorclass="error" class="form-control tel" id="celular1" name="celular1" th:field="*{celular1}" required>
+                    <label th:if="${#fields.hasErrors('celular1')}" th:errors="*{celular1}" for="celular1" id="celular1-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="celular1" class="form-label">Celular 02:</label>
+                    <input type="text" class="form-control tel" id="celular2" name="celular2" th:field="*{celular2}">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" th:errorclass="error" class="form-control email" id="email" name="email" th:field="*{email}" required>
+                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" for="email" id="email-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="btn-group mt-2" role="group">
+                <button type="button" class="btn btn-secondary" onclick="prevPage(3,2)">Anterior</button>
+                <button class="btn btn-primary" th:if="${#strings.isEmpty(enderecoEntity.id)}" type="submit">Próximo</button>
+                <button class="btn btn-success" th:if="${!#strings.isEmpty(enderecoEntity.id)}" type="submit">Salvar e Prosseguir</button>
+                <button type="button" class="btn btn-primary" th:if="${!#strings.isEmpty(enderecoEntity.id) && !#fields.hasErrors('*')}" onclick="nextPage(3,4)">Prosseguir</button>
+                <a class="btn btn-danger text_btn_shd" th:href="@{/site}"><i class="fas fa-window-close"></i> Cancelar</a>
+            </div>
+        </form>
+        <script type="text/javascript" th:src="@{/assets/js/buscar_cep.js}"></script>
+    </section>
+</body>
+</html>

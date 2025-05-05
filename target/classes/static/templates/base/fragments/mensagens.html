@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head></head>
+<body>
+    <section th:fragment="msg">
+        <div th:if="${param.logout}">
+            <script type="text/javascript" >
+                $(document).ready(function() {
+                    var url_atual = window.location.href;
+                    var new_url = url_atual.replace(/(\?).*/gm,"");
+                    history.pushState({}, null, new_url);
+                    $("#div_resultado").html('<h4 class="m-auto alert-success p-3 text-center">Titulo: <strong>Logout com sucesso</strong></h4>'
+                                        +'<div class="card p-3"><p class="p-0">'
+                                        +'    <div class="form-group">'
+                                        +'        <label><b>Mensagem: </b></label>'
+                                        +'        <textarea class="form-control" disabled>Você está desconectado.</textarea>'
+                                        +'    </div>'
+                                        +'</div>'
+                                        +'<a href="#" class="btn btn-primary m-3" data-bs-dismiss="modal">Fechar</a>');
+                    $("#modal_elemento").modal("show");
+                    autosize(document.querySelectorAll('textarea'));
+                });
+            </script>
+        </div>
+        <div th:if="${param.exception}">
+            <script type="text/javascript" >
+                $(document).ready(function() {
+                    var url_atual = window.location.href;
+                    var new_url = url_atual.replace(/(\?).*/gm,"");
+                    history.pushState({}, null, new_url);
+                    var title = "[[${#strings.isEmpty(session.error)} ? 'Operação não realizada' : ${session.error.title}]]";
+                    var code = "[[${#strings.isEmpty(session.error)} ? 'COD-0000' : ${session.error.codigo}]]";
+                    var exception = "[[${#strings.isEmpty(session.error)} ? 'NotFoundException' : ${session.error.exception}]]";
+                    var detail = "[[${#strings.isEmpty(session.error)} ? 'Falha interna. Favor entrar em contato com suporte técnico' : ${session.error.detail}]]";
+                    $("#div_resultado").html('<h4 class="m-auto alert-danger p-3 text-center">Titulo: '+title+'</strong></h4>'
+                                        +'<div class="card p-3"><p class="p-0">'
+                                        +'    <div class="form-group">'
+                                        +'        <label><b>Código: </b></label>'
+                                        +'        <input type="text" class="form-control" value="'+code+'" disabled>'
+                                        +'    </div>'
+    <!--                                    +'    <div class="form-group">'-->
+    <!--                                    +'        <label><b>Exception: </b></label>'-->
+    <!--                                    +'        <input type="text" class="form-control" value="'+exception+'" disabled>'-->
+    <!--                                    +'    </div>'-->
+                                        +'    <div class="form-group">'
+                                        +'        <label><b>Mensagem: </b></label>'
+                                        +'        <textarea class="form-control" disabled>'+detail+'</textarea>'
+                                        +'    </div>'
+                                        +'</div>'
+                                        +'<a href="#" class="btn btn-primary m-3" data-bs-dismiss="modal">Fechar</a>');
+                    $("#modal_elemento").modal("show");
+                    autosize(document.querySelectorAll('textarea'));
+                });
+            </script>
+        </div>
+    </section>
+</body>
+</html>

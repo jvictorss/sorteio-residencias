@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" th:attr="data-bs-theme=${themeRSD}"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:fragment="index(base)" class="layout-menu-collapsed">
+  <head>
+    <th:block th:replace="base/fragments/head :: head-css-tag"></th:block>
+    <th:block th:replace="base/fragments/head :: head-css-all"></th:block>
+    <th:block th:replace="base/fragments/head :: head-css-sider-bar"></th:block>
+  </head>
+
+  <body id="tl-principal">
+    <th:block th:replace="base/modal/modal :: modal"></th:block>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <th:block th:replace="base/fragments/sidebar :: navbar"></th:block>
+        <!-- / Menu -->
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <th:block th:replace="base/fragments/topbar :: navbar"></th:block>
+          <!-- / Navbar -->
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <div th:replace="${base}"></div>
+            </div>
+            <!-- / Content -->
+            <!-- Footer -->
+            <div th:replace="base/fragments/footer_principal :: footer"/>
+            <!-- / Footer -->
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+    </div>
+    <div th:replace="base/fragments/head :: head-js-base"/>
+    <div th:replace="base/fragments/head :: head-js-logado"/>
+    <th:block th:replace="base/fragments/mensagens"></th:block>
+  </body>
+</html>

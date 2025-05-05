@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head></head>
+<body>
+    <section th:fragment="formulario" th:remove="tag">
+        <form id="form2" method="post" th:action="@{/site/back/cidadaodetalhe}" class="was-validated" th:object="${cidadaoDetalheEntity}">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <input type="hidden" id="id_cidadao" name="id_cidadao" th:value="${idCidadao}">
+            <div class="row">
+                <div class="mb-3">
+                    <label class="form-label" for="isDeficienteSim">Você é portador de deficiência (PCD)?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="isDeficiente" id="isDeficienteSim" value="true" th:checked="*{isDeficiente} == true ? 'checked' : ''" th:field="*{isDeficiente}" required>
+                        <label class="form-check-label" for="isDeficienteSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="isDeficiente" id="isDeficienteNao" value="false" th:checked="*{isDeficiente} == false ? 'checked' : ''" th:field="*{isDeficiente}" required>
+                        <label class="form-check-label" for="isDeficienteNao">Não</label>
+                        <label th:if="${#fields.hasErrors('isDeficiente')}" th:errorclass="error" th:errors="*{isDeficiente}" id="isDeficiente-error" class="error invalid-feedback">Campo Obrigatório</label>
+                    </div>
+                </div>
+                <div id="div-add-1" th:classappend="*{isDeficiente}? '':'d-none'" class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="tipoDeficiencia" class="form-label">Tipo de Deficiência:</label>
+                        <select class="form-select" th:errorclass="error" id="tipoDeficiencia" name="tipoDeficiencia" th:field="*{tipoDeficiencia}" required>
+                            <option value="">Selecione um opção</option>
+                            <option th:each="tipo : ${T(gov.residenciais.enuns.TipoDeficienciaEnum).values()}"
+                                    th:value="${tipo.name()}"
+                                    th:text="${tipo.descricao}">
+                        </select>
+                        <label th:if="${#fields.hasErrors('tipoDeficiencia')}" th:errorclass="error" th:errors="*{tipoDeficiencia}" id="tipoDeficiencia-error" class="error invalid-feedback" for="tipoDeficiencia">Campo Obrigatório</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cidDeficiencia" class="form-label">CID da Deficiência:</label>
+                        <input type="text" th:errorclass="error" class="form-control" id="cidDeficiencia" name="cidDeficiencia" th:field="*{cidDeficiencia}" required>
+                        <span th:if="${#fields.hasErrors('cidDeficiencia')}" th:errorclass="error" th:errors="*{cidDeficiencia}" id="cidDeficiencia-error" class="error invalid-feedback" for="cidDeficiencia">Campo Obrigatório</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="pessoaDeficienteFamiliaSim">Tem pessoa com dificiência no grupo familiar (PCD)?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="pessoaDeficienteFamilia" id="pessoaDeficienteFamiliaSim" value="true" th:checked="*{pessoaDeficienteFamilia} == true ? 'checked' : ''" th:field="*{pessoaDeficienteFamilia}" required>
+                        <label class="form-check-label" for="pessoaDeficienteFamiliaSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="pessoaDeficienteFamilia" id="pessoaDeficienteFamiliaNao" value="false" th:checked="*{pessoaDeficienteFamilia} == false ? 'checked' : ''" th:field="*{pessoaDeficienteFamilia}" required>
+                        <label class="form-check-label" for="pessoaDeficienteFamiliaNao">Não</label>
+                        <label th:if="${#fields.hasErrors('pessoaDeficienteFamilia')}" th:errorclass="error" th:errors="*{pessoaDeficienteFamilia}" id="pessoaDeficienteFamilia-error" class="error invalid-feedback">Campo Obrigatório</label>
+                    </div>
+                </div>
+                <div id="div-add-2" th:classappend="*{pessoaDeficienteFamilia}? '':'d-none'" class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="tipoDeficienciaDoFamiliar" class="form-label">Tipo de Deficiência do Familiar:</label>
+                        <select class="form-select" th:errorclass="error" id="tipoDeficienciaDoFamiliar" name="tipoDeficienciaDoFamiliar" th:field="*{tipoDeficienciaDoFamiliar}" required>
+                            <option value="">Selecione um opção</option>
+                            <option th:each="tipo : ${T(gov.residenciais.enuns.TipoDeficienciaEnum).values()}"
+                                    th:value="${tipo.name()}"
+                                    th:text="${tipo.descricao}">
+                        </select>
+                        <span th:if="${#fields.hasErrors('tipoDeficienciaDoFamiliar')}" th:errorclass="error" th:errors="*{tipoDeficienciaDoFamiliar}" id="tipoDeficienciaDoFamiliar-error" class="error invalid-feedback" for="tipoDeficienciaDoFamiliar">Campo Obrigatório</span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cidDeficienciaFamiliar" class="form-label">CID da Deficiência do Familiar:</label>
+                        <input type="text" th:errorclass="error" class="form-control" id="cidDeficienciaFamiliar" name="cidDeficienciaFamiliar" th:field="*{cidDeficienciaFamiliar}" required>
+                        <span th:if="${#fields.hasErrors('cidDeficienciaFamiliar')}" th:errorclass="error" th:errors="*{cidDeficienciaFamiliar}" id="cidDeficienciaFamiliar-error" class="error invalid-feedback" for="cidDeficienciaFamiliar">Campo Obrigatório</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">É o Responsável Familiar?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="responsavelFamiliar" id="responsavelFamiliarSim" value="true" th:checked="*{responsavelFamiliar} == true ? 'checked' : ''" th:field="*{responsavelFamiliar}" required>
+                        <label class="form-check-label" for="responsavelFamiliarSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="responsavelFamiliar" id="responsavelFamiliarNao" value="false" th:checked="*{responsavelFamiliar} == false ? 'checked' : ''" th:field="*{responsavelFamiliar}" required>
+                        <label class="form-check-label" for="responsavelFamiliarNao">Não</label>
+                        <span th:if="${#fields.hasErrors('responsavelFamiliar')}" th:errorclass="error" th:errors="*{responsavelFamiliar}" id="responsavelFamiliar-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div id="div-add-3" class="col-md-9 mb-3" th:classappend="*{!responsavelFamiliar}? '':'d-none'">
+                    <label for="responsavelFamiliarNome" class="form-label">Nome do Responsável Familiar:</label>
+                    <input type="text" th:errorclass="error" class="form-control minimoCaracter" id="responsavelFamiliarNome" name="responsavelFamiliarNome" th:field="*{responsavelFamiliarNome}" required>
+                    <span th:if="${#fields.hasErrors('responsavelFamiliarNome')}" th:errorclass="error" th:errors="*{responsavelFamiliarNome}" id="responsavelFamiliarNome-error" class="error invalid-feedback" for="responsavelFamiliarNome">Campo Obrigatório</span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="formaDeRemuneracao" class="form-label">Forma de Remuneração:</label>
+                    <select class="form-select col-md-4" th:errorclass="error" id="formaDeRemuneracao" name="formaDeRemuneracao" th:field="*{formaDeRemuneracao}" required>
+                        <option value="">Selecione uma opção</option>
+                        <option th:each="forma : ${T(gov.residenciais.enuns.FormaDeRemuneracaoEnum).values()}"
+                                th:value="${forma.name()}"
+                                th:text="${forma.descricao}">
+                    </select>
+                    <span th:if="${#fields.hasErrors('formaDeRemuneracao')}" th:errorclass="error" th:errors="*{formaDeRemuneracao}" id="formaDeRemuneracao-error" class="error invalid-feedback" for="formaDeRemuneracao">Campo Obrigatório</span>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="rendaFamiliar" class="form-label m-0">Renda Bruta Familiar dos maiores de 18 anos:</label>
+                    <br>
+                    <small class="form-text text-muted">Não somar ao valor da renda bruta total da família os valores recebidos a título de Benefício de Prestação Continuada ao idoso ou deficiente e outros programas sociais de transferência de renda</small>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="rounded-0 rounded-start input-group-text" id="inputGroupPrepend">R$</div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" th:errorclass="error" class="form-control rounded-0 rounded-end dinheiro" id="rendaFamiliar" name="rendaFamiliar" th:field="*{rendaFamiliar}" required>
+                        </div>
+                    </div>
+                    <span th:if="${#fields.hasErrors('rendaFamiliar')}" th:errorclass="error" th:errors="*{rendaFamiliar}" id="rendaFamiliar-error" class="error invalid-feedback" for="rendaFamiliar">Campo Obrigatório</span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label m-0">Você possui FGTS?</label>
+                    <br>
+                    <small class="form-text text-muted">Marque essa opção se você é beneficiário ou possui saldo de FGTS (Fundo de Garantia por Tempo de Serviço).</small>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="fgts" id="fgtsSim" value="true" th:checked="*{fgts} == true ? 'checked' : ''" th:field="*{fgts}" required>
+                        <label class="form-check-label" for="fgtsSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="fgts" id="fgtsNao" value="false" th:checked="*{fgts} == false ? 'checked' : ''" th:field="*{fgts}" required>
+                        <label class="form-check-label" for="fgtsNao">Não</label>
+                        <span th:if="${#fields.hasErrors('fgts')}" th:errorclass="error" th:errors="*{fgts}" id="fgts-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="mb-3" th:if="${isAuth}">
+                    <label class="form-label">Foi aprovado pela Caixa Econômica?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="caixa" id="caixaSim" value="true" th:checked="*{caixa} == true ? 'checked' : ''" th:field="*{caixa}" required>
+                        <label class="form-check-label" for="caixaSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="caixa" id="caixaNao" value="false" th:checked="*{caixa} == false ? 'checked' : ''" th:field="*{caixa}" required>
+                        <label class="form-check-label" for="caixaNao">Não</label>
+                        <span th:if="${#fields.hasErrors('caixa')}" th:errorclass="error" th:errors="*{caixa}" id="caixa-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Integra Déficit Habitacional?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="integraDeficitHabitacional" id="integraDeficitHabitacionalSim" value="true" th:checked="*{integraDeficitHabitacional} == true ? 'checked' : ''" th:field="*{integraDeficitHabitacional}" required>
+                        <label class="form-check-label" for="integraDeficitHabitacionalSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="integraDeficitHabitacional" id="integraDeficitHabitacionalNao" value="false" th:checked="*{integraDeficitHabitacional} == false ? 'checked' : ''" th:field="*{integraDeficitHabitacional}" required>
+                        <label class="form-check-label" for="integraDeficitHabitacionalNao">Não</label>
+                        <span th:if="${#fields.hasErrors('integraDeficitHabitacional')}" th:errorclass="error" th:errors="*{integraDeficitHabitacional}" id="integraDeficitHabitacional-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div id="div-add-4" th:classappend="*{integraDeficitHabitacional}? '':'d-none'">
+                    <div class="col-md-8 mb-3">
+                        <label for="DeficitHabitacional" class="form-label">Déficit Habitacional:</label>
+                        <select class="form-select" th:errorclass="error" id="DeficitHabitacional" name="DeficitHabitacional" th:field="*{DeficitHabitacional}" required>
+                            <option value="">Selecione um opção</option>
+                            <option th:each="tipo : ${T(gov.residenciais.enuns.DeficitsHabitacionaisEnum).values()}"
+                                    th:value="${tipo.name()}"
+                                    th:text="${tipo.descricao}">
+                        </select>
+                        <span th:if="${#fields.hasErrors('DeficitHabitacional')}" th:errorclass="error" th:errors="*{DeficitHabitacional}" id="DeficitHabitacional-error" class="error invalid-feedback" for="DeficitHabitacional">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Você é proprietário de outro imóvel em área urbana ou rural?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="temImovel" id="temImovelSim" value="true" th:checked="*{temImovel} == true ? 'checked' : ''" th:field="*{temImovel}" required>
+                        <label class="form-check-label" for="temImovelSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="temImovel" id="temImovelNao" value="false" th:checked="*{temImovel} == false ? 'checked' : ''" th:field="*{temImovel}" required>
+                        <label class="form-check-label" for="temImovelNao">Não</label>
+                        <span th:if="${#fields.hasErrors('temImovel')}" th:errorclass="error" th:errors="*{temImovel}" id="temImovel-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Você já foi beneficiado em algum outro programa habitacional ou de regularização fundiária nos últimos 10 Anos?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="beneficioHabitacional" id="beneficioHabitacionalSim" value="true" th:checked="*{beneficioHabitacional} == false ? 'checked' : ''" th:field="*{beneficioHabitacional}" required>
+                        <label class="form-check-label" for="beneficioHabitacionalSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="beneficioHabitacional" id="beneficioHabitacionalNao" value="false" th:checked="*{beneficioHabitacional} == false ? 'checked' : ''" th:field="*{beneficioHabitacional}" required>
+                        <label class="form-check-label" for="beneficioHabitacionalNao">Não</label>
+                        <span th:if="${#fields.hasErrors('beneficioHabitacional')}" th:errorclass="error" th:errors="*{beneficioHabitacional}" id="beneficioHabitacional-error" class="error invalid-feedback">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Em qual grupo pretende concorrer?</label>
+                    <div class="form-check"  th:each="grupo, stat : ${T(gov.residenciais.enuns.DestinacaoExclusivaEnum).values()}">
+                        <input class="form-check-input" th:errorclass="error" type="radio" name="destinacaoExclusiva" th:id="'destinacaoExclusiva'+${stat.index+1}" th:value="${grupo.name()}" th:checked="*{destinacaoExclusiva} == ${grupo} ? 'checked' : ''" th:field="*{destinacaoExclusiva}" required>
+                        <label class="form-check-label" th:for="'destinacaoExclusiva'+${stat.index+1}" th:text="${grupo.descricao}"></label>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tempoDeResidenciaMunicipio" class="form-label">Há quanto anos você mora no município de Serra Talhada?</label>
+                    <div class="col-md-2">
+                        <input type="number" th:errorclass="error" class="form-control" id="tempoDeResidenciaMunicipio" name="tempoDeResidenciaMunicipio" min="0" th:field="*{tempoDeResidenciaMunicipio}" required>
+                    </div>
+                    <span th:if="${#fields.hasErrors('tempoDeResidenciaMunicipio')}" th:errorclass="error" th:errors="*{tempoDeResidenciaMunicipio}" id="tempoDeResidenciaMunicipio-error" class="error invalid-feedback" for="tempoDeResidenciaMunicipio">Campo Obrigatório</span>
+                </div>
+            </div>
+            <div class="btn-group mt-2" role="group">
+                <button type="button" class="btn btn-secondary" onclick="prevPage(2,1)">Anterior</button>
+                <button class="btn btn-primary" th:if="${#strings.isEmpty(cidadaoDetalheEntity.id)}" type="submit">Próximo</button>
+                <button class="btn btn-success" th:if="${!#strings.isEmpty(cidadaoDetalheEntity.id)}" type="submit">Salvar e Prosseguir</button>
+                <button type="button" class="btn btn-primary" th:if="${!#strings.isEmpty(cidadaoDetalheEntity.id) && !#fields.hasErrors('*')}" onclick="nextPage(2,3)">Prosseguir</button>
+                <a class="btn btn-danger text_btn_shd" th:href="@{/site}"><i class="fas fa-window-close"></i> Cancelar</a>
+            </div>
+        </form>
+        <script>
+            function exibirMensagemDeficiencia() {
+              if ($('input[name="isDeficiente"]:checked').val() === "true") {
+
+                document.getElementById('div-add-1').classList.remove('d-none');
+              } else {
+                document.getElementById('div-add-1').classList.add('d-none');
+              }
+            }
+            $('[name="isDeficiente"]').on('change', exibirMensagemDeficiencia);
+
+            function exibirMensagemPessoaDeficienteFamilia() {
+              if ($('input[name="pessoaDeficienteFamilia"]:checked').val() === "true") {
+                document.getElementById('div-add-2').classList.remove('d-none');
+              } else {
+                document.getElementById('div-add-2').classList.add('d-none');
+              }
+            }
+            $('[name="pessoaDeficienteFamilia"]').on('change', exibirMensagemPessoaDeficienteFamilia);
+
+            function exibirMensagemResponsavelFamiliar() {
+              if ($('input[name="responsavelFamiliar"]:checked').val() === "false") {
+                document.getElementById('div-add-3').classList.remove('d-none');
+              } else {
+                document.getElementById('div-add-3').classList.add('d-none');
+              }
+            }
+            $('[name="responsavelFamiliar"]').on('change', exibirMensagemResponsavelFamiliar);
+
+            function exibirIntegraDeficitHabitacional() {
+              if ($('input[name="integraDeficitHabitacional"]:checked').val() === "true") {
+                document.getElementById('div-add-4').classList.remove('d-none');
+              } else {
+                document.getElementById('div-add-4').classList.add('d-none');
+              }
+            }
+            $('[name="integraDeficitHabitacional"]').on('change', exibirIntegraDeficitHabitacional);
+        </script>
+    </section>
+</body>
+</html>

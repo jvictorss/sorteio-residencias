@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head></head>
+<body>
+    <section th:fragment="formulario" th:remove="tag">
+        <form id="form1" method="post" th:action="@{/site/back/cidadao}" class="was-validated" th:object="${cidadaoEntity}">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome" class="form-label">Nome Completo Do Responsável Familiar:</label>
+                    <input type="text" class="form-control minimoCaracter" th:errorclass="error" id="nome" name="nome" th:field="*{nome}" required>
+                    <label th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" id="nome-error" class="error invalid-feedback" for="nome">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nomeSocial" class="form-label">Nome Social:</label>
+                    <input type="text" class="form-control minimoCaracter" id="nomeSocial" name="nomeSocial" th:field="*{nomeSocial}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="nis" class="form-label">NIS:</label>
+                    <input type="text" class="form-control validNIS nis" th:errorclass="error" id="nis" name="nis" th:field="*{nis}" required>
+                    <label th:if="${#fields.hasErrors('nis')}" th:errors="*{nis}" id="nis-error" class="error invalid-feedback" for="nis">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="cpf" class="form-label">CPF:</label>
+                    <input type="text" class="form-control cpf documento" th:errorclass="error" id="cpf" name="cpf" th:field="*{cpf}" required>
+                    <label th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" id="cpf-error" class="error invalid-feedback" for="cpf">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="rg" class="form-label">RG:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="rg" name="rg" th:field="*{rg}" required>
+                    <label th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}" id="rg-error" class="error invalid-feedback" for="rg">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="orgaoEmissor" class="form-label">Órgão Emissor:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="orgaoEmissor" name="orgaoEmissor" th:field="*{orgaoEmissor}" required>
+                    <label th:if="${#fields.hasErrors('orgaoEmissor')}" th:errors="*{orgaoEmissor}" id="orgaoEmissor-error" class="error invalid-feedback" for="orgaoEmissor">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="dataEmissaoRg" class="form-label">Data de Emissão do RG:</label>
+                    <input type="date" class="form-control" th:errorclass="error" id="dataEmissaoRg" name="dataEmissaoRg" th:field="*{dataEmissaoRg}" required>
+                    <label th:if="${#fields.hasErrors('dataEmissaoRg')}" th:errors="*{dataEmissaoRg}" id="dataEmissaoRg-error" class="error invalid-feedback" for="dataEmissaoRg">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="dataNascimento" class="form-label">Data de Nascimento:</label>
+                    <input type="date" class="form-control" th:errorclass="error" id="dataNascimento" name="dataNascimento" th:field="*{dataNascimento}" required>
+                    <label th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" id="dataNascimento-error" class="error invalid-feedback" for="dataNascimento">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="raca" class="form-label">Raça:</label>
+                    <select class="form-select" th:errorclass="error" id="raca" name="raca" th:field="*{raca}" required>
+                        <option value="">Selecione uma opção</option>
+                        <option th:each="raca : ${T(gov.residenciais.enuns.RacaEnum).values()}"
+                                th:value="${raca.name()}"
+                                th:text="${raca.descricao}">
+                    </select>
+                    <label th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}" id="raca-error" class="error invalid-feedback" for="raca">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="sexo" class="form-label">Sexo:</label>
+                    <select class="form-select" th:errorclass="error" id="sexo" name="sexo" th:field="*{sexo}" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
+                    <label th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}" id="sexo-error" class="error invalid-feedback" for="sexo">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="estadoCivil" class="form-label">Estado Civil:</label>
+                    <select class="form-select" th:errorclass="error" id="estadoCivil" name="estadoCivil" th:field="*{estadoCivil}" required>
+                        <option value="">Selecione uma opção</option>
+                        <option th:each="estadoCivil : ${T(gov.residenciais.enuns.EstadoCivilEnum).values()}"
+                                th:value="${estadoCivil.name()}"
+                                th:text="${estadoCivil.descricao}">
+                    </select>
+                    <label th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}" id="estadoCivil-error" class="error invalid-feedback" for="estadoCivil">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="nacionalidade" class="form-label">Nacionalidade:</label>
+                    <select class="form-select" th:errorclass="error" id="nacionalidade" name="nacionalidade" th:field="*{nacionalidade}" required>
+                        <option value="">Selecione opção</option>
+                        <option value="Brasileiro(a)">Brasileiro(a)</option>
+                        <option value="Estrangeiro(a) Naturalizado(a)">Estrangeiro(a) Naturalizado(a)</option>
+                        <option value="Estrangeiro">Estrangeiro</option>
+                    </select>
+                    <label th:if="${#fields.hasErrors('nacionalidade')}" th:errors="*{nacionalidade}" id="nacionalidade-error" class="error invalid-feedback" for="nacionalidade">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="estadoNascimento" class="form-label">Estado de Nascimento:</label>
+                    <select class="form-select" th:errorclass="error" id="estadoNascimento" name="estadoNascimento" th:field="*{estadoNascimento}" required>
+                        <option value="" selected>Selecione uma opção</option>
+                        <option th:each="estado : ${T(gov.residenciais.enuns.EstadosEnum).values()}"
+                                th:value="${estado}"
+                                th:text="${estado.descricao}">
+                    </select>
+                    <label th:if="${#fields.hasErrors('estadoNascimento')}" th:errors="*{stadoNascimento}" id="estadoNascimento-error" class="error invalid-feedback" for="estadoNascimento">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="cidadeNascimento" class="form-label">Cidade de Nascimento:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="cidadeNascimento" name="cidadeNascimento" th:field="*{cidadeNascimento}" required>
+                    <label th:if="${#fields.hasErrors('cidadeNascimento')}" th:errors="*{cidadeNascimento}" id="cidadeNascimento-error" class="error invalid-feedback" for="cidadeNascimento">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="escolaridade" class="form-label">Escolaridade:</label>
+                    <select class="form-select" th:errorclass="error" id="escolaridade" name="escolaridade" th:field="*{escolaridade}" required>
+                        <option value="">Selecione uma opção</option>
+                        <option th:each="escolaridade : ${T(gov.residenciais.enuns.EscolaridadeEnum).values()}"
+                                th:value="${escolaridade.name()}"
+                                th:text="${escolaridade.descricao}">
+                    </select>
+                    <label th:if="${#fields.hasErrors('escolaridade')}" th:errors="*{escolaridade}" id="escolaridade-error" class="error invalid-feedback" for="escolaridade">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="profissaoOcupacao" class="form-label">Profissão/Ocupação:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="profissaoOcupacao" name="profissaoOcupacao" th:field="*{profissaoOcupacao}" required>
+                    <label th:if="${#fields.hasErrors('profissaoOcupacao')}" th:errors="*{profissaoOcupacao}" id="profissaoOcupacao-error" class="error invalid-feedback" for="profissaoOcupacao">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nomeDaMae" class="form-label">Nome da Mãe:</label>
+                    <input type="text" class="form-control minimoCaracter" th:errorclass="error" id="nomeDaMae" name="nomeDaMae" th:field="*{nomeDaMae}" required>
+                    <label th:if="${#fields.hasErrors('nomeDaMae')}" th:errors="*{nomeDaMae}" id="nomeDaMae-error" class="error invalid-feedback" for="nomeDaMae">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nomeDoPai" class="form-label">Nome do Pai:</label>
+                    <input type="text" class="form-control minimoCaracter" id="nomeDoPai" name="nomeDoPai" th:field="*{nomeDoPai}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="tituloEleitor" class="form-label">Título de Eleitor:</label>
+                    <input type="text" class="form-control titulo" th:errorclass="error" id="tituloEleitor" name="tituloEleitor" maxlength="12" th:field="*{tituloEleitor}" required>
+                    <label th:if="${#fields.hasErrors('tituloEleitor')}" th:errors="*{tituloEleitor}" id="tituloEleitor-error" class="error invalid-feedback" for="tituloEleitor">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="zonaEleitoral" class="form-label">Zona Eleitoral:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="zonaEleitoral" name="zonaEleitoral" maxlength="3" th:field="*{zonaEleitoral}" required>
+                    <label th:if="${#fields.hasErrors('zonaEleitoral')}" th:errors="*{zonaEleitoral}" id="zonaEleitoral-error" class="error invalid-feedback" for="zonaEleitoral">Campo Obrigatório</label>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="secaoEleitoral" class="form-label">Seção Eleitoral:</label>
+                    <input type="text" class="form-control" th:errorclass="error" id="secaoEleitoral" name="secaoEleitoral" maxlength="3" th:field="*{secaoEleitoral}" required>
+                    <label th:if="${#fields.hasErrors('secaoEleitoral')}" th:errors="*{secaoEleitoral}" id="secaoEleitoral-error" class="error invalid-feedback" for="secaoEleitoral">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div class="btn-group mt-2" role="group">
+                <button class="btn btn-primary" th:if="${#strings.isEmpty(cidadaoEntity.id)}" type="submit">Próximo</button>
+                <button class="btn btn-success" th:if="${!#strings.isEmpty(cidadaoEntity.id)}" type="submit">Salvar e Prosseguir</button>
+                <button type="button" class="btn btn-primary" th:if="${!#strings.isEmpty(cidadaoEntity.id) && !#fields.hasErrors('*')}" onclick="nextPage(1,2)">Prosseguir</button>
+                <a class="btn btn-danger text_btn_shd" th:href="@{/site}"><i class="fas fa-window-close"></i> Cancelar</a>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

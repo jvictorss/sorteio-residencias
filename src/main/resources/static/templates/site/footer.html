@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div th:fragment="footer_site">
+        <footer class="block_footer_site">
+            <div class="rodape row m-0 text-left">
+                <div class="col-md-2 mb-3">
+                    <h3>Canais Oficiais</h3>
+                    <p>Siga-nos nas redes sociais</p>
+                    <div class="icones">
+                        <i class="fa-brands fa-square-twitter"></i>
+                        <i class="fa-brands fa-square-facebook"></i>
+                        <i class="fa-brands fa-square-instagram"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h3>Prefeitura</h3>
+                    <p>Carta de serviços</p>
+                    <p>Arquivos de notícias</p>
+                    <p>Mapa de unidades</p>
+                    <p>Portal da transparência</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Endereço</h3>
+                    <p>R. Agostinho Nunes de Magalhães, 125 -</p>
+                    <p>Nossa Sra. da Penha, Serra Talhada - PE, 56903-510</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Fale conosco</h3>
+                    <p>Segunda a sexta, das 8 as 17 horas</p>
+                    <p>Telefone (87) 3831-0000</p>
+                    <p>Ouvidoria 123</p>
+                </div>
+            </div>
+            <div>
+                <span th:text="${session.rodape.textCopyright}"></span>
+                <br>
+                <span th:text="${session.rodape.textLocal}"></span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

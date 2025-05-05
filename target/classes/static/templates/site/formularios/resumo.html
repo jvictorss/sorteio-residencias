@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head></head>
+<body>
+    <section th:fragment="formulario">
+        <div class="row mt-2">
+            <fieldset class="rounded">
+                <legend>Informações Pessoais</legend>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="nome" th:text="${cidadaoEntity.nome}"></span>
+                        <label for="nome" class="ms-2">Nome:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="nomeSocial" th:text="${cidadaoEntity.nomeSocial}"></span>
+                        <label for="nomeSocial" class="ms-2">Nome Social:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="nis" th:text="${cidadaoEntity.nis}"></span>
+                        <label for="nis" class="ms-2">Número do NIS:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="cpf" th:text="${cidadaoEntity.cpf}"></span>
+                        <label for="cpf" class="ms-2">Número do CPF:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="rg" th:text="${cidadaoEntity.rg}"></span>
+                        <label for="rg" class="ms-2">Número do RG:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="orgaoEmissor" th:text="${cidadaoEntity.orgaoEmissor}"></span>
+                        <label for="orgaoEmissor" class="ms-2">Órgão Emissor do RG:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="dataEmissaoRg" th:text="${cidadaoEntity.dataEmissaoRg}"></span>
+                        <label for="dataEmissaoRg" class="ms-2">Data de Emissão do RG:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="dataNascimento" th:text="${cidadaoEntity.dataNascimento}"></span>
+                        <label for="dataNascimento" class="ms-2">Data de Nascimento:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="raca" th:text="${cidadaoEntity.raca}"></span>
+                        <label for="raca" class="ms-2">Raça:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="sexo" th:text="${cidadaoEntity.sexo}"></span>
+                        <label for="sexo" class="ms-2">Sexo:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-5">
+                        <span class="form-control" id="estadoCivil" th:text="${cidadaoEntity.estadoCivil}"></span>
+                        <label for="estadoCivil" class="ms-2">Estado Civil:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="nacionalidade" th:text="${cidadaoEntity.nacionalidade}"></span>
+                        <label for="nacionalidade" class="ms-2">Nacionalidade:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="estadoNascimento" th:text="${cidadaoEntity.estadoNascimento}"></span>
+                        <label for="estadoNascimento" class="ms-2">Estado de Nascimento:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="cidadeNascimento" th:text="${cidadaoEntity.cidadeNascimento}"></span>
+                        <label for="cidadeNascimento" class="ms-2">Cidade de Nascimento:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="escolaridade" th:text="${cidadaoEntity.escolaridade}"></span>
+                        <label for="escolaridade" class="ms-2">Escolaridade:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="profissaoOcupacao" th:text="${cidadaoEntity.profissaoOcupacao}"></span>
+                        <label for="profissaoOcupacao" class="ms-2">Profissão/Ocupação:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="nomeDaMae" th:text="${cidadaoEntity.nomeDaMae}"></span>
+                        <label for="nomeDaMae" class="ms-2">Nome da Mãe:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="nomeDoPai" th:text="${cidadaoEntity.nomeDoPai}"></span>
+                        <label for="nomeDoPai" class="ms-2">Nome do Pai:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="tituloEleitor" th:text="${cidadaoEntity.tituloEleitor}"></span>
+                        <label for="tituloEleitor" class="ms-2">Número do Título Eleitoral:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="zonaEleitoral" th:text="${cidadaoEntity.zonaEleitoral}"></span>
+                        <label for="zonaEleitoral" class="ms-2">Zona Eleitoral:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="secaoEleitoral" th:text="${cidadaoEntity.secaoEleitoral}"></span>
+                        <label for="secaoEleitoral" class="ms-2">Seção Eleitoral:</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="rounded">
+                <legend>Informações Adicionais</legend>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="isDeficiente" th:text="${cidadaoDetalheEntity.isDeficiente} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2" id="lb1">Você é portador de deficiência (PCD)?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-2" th:if="${cidadaoDetalheEntity.isDeficiente}">
+                        <span class="form-control" id="cidDeficiencia" th:text="${cidadaoDetalheEntity.cidDeficiencia}"></span>
+                        <label class="ms-2">Qual o CID da deficiência?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6" th:if="${cidadaoDetalheEntity.isDeficiente}">
+                        <span class="form-control" id="tipoDeficiencia" th:text="${cidadaoDetalheEntity.tipoDeficiencia}"></span>
+                        <label class="ms-2">Qual a descrição da deficiência?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="pessoaDeficienteFamilia" th:text="${cidadaoDetalheEntity.pessoaDeficienteFamilia} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">Tem pessoa com dificiência no grupo familiar (PCD)?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-2" th:if="${cidadaoDetalheEntity.pessoaDeficienteFamilia}">
+                        <span class="form-control" id="cidDeficienciaFamiliar" th:text="${cidadaoDetalheEntity.cidDeficienciaFamiliar}"></span>
+                        <label class="ms-2">Qual o CID da deficiência do Familiar?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6" th:if="${cidadaoDetalheEntity.pessoaDeficienteFamilia}">
+                        <span class="form-control" id="tipoDeficienciaDoFamiliar" th:text="${cidadaoDetalheEntity.tipoDeficienciaDoFamiliar}"></span>
+                        <label class="ms-2">Qual a descrição da deficiência?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="responsavelFamiliar" th:text="${cidadaoDetalheEntity.responsavelFamiliar} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">É o responsável familiar?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-8" th:if="${!cidadaoDetalheEntity.responsavelFamiliar}">
+                        <span class="form-control" id="responsavelFamiliarNome" th:text="${cidadaoDetalheEntity.responsavelFamiliarNome}"></span>
+                        <label class="ms-2">Qual o nome do responsável familiar?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="formaDeRemuneracao" th:text="${cidadaoDetalheEntity.formaDeRemuneracao}"></span>
+                        <label class="ms-2">Qual a formação de remuneração?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="rendaFamiliar" th:text="${cidadaoDetalheEntity.rendaFamiliar}"></span>
+                        <label class="ms-2">Qual a renda bruta familiar dos maiores de 18 anos</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="fgts" th:text="${cidadaoDetalheEntity.fgts} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">Você possui FGTS?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="integraDeficitHabitacional" th:text="${cidadaoDetalheEntity.integraDeficitHabitacional} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">Integra déficit habitacional?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-8" th:if="${cidadaoDetalheEntity.integraDeficitHabitacional}">
+                        <span class="form-control" id="DeficitHabitacional" th:text="${cidadaoDetalheEntity.DeficitHabitacional}"></span>
+                        <label class="ms-2">Qual o déficit habitacional?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-12">
+                        <span class="form-control" id="beneficioHabitacional" th:text="${cidadaoDetalheEntity.beneficioHabitacional} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">Você já foi beneficiado em algum outro programa habitacional ou de regularização fundiária nos últimos 10 Anos?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="temImovel" th:text="${cidadaoDetalheEntity.temImovel} == true ? 'SIM' : 'NÃO'"></span>
+                        <label class="ms-2">Você é proprietário de outro imóvel em área urbana ou rural?</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-6">
+                        <span class="form-control" id="tempoDeResidenciaMunicipio" th:text="${cidadaoDetalheEntity.tempoDeResidenciaMunicipio}"></span>
+                        <label class="ms-2">Há quanto anos você mora no município de Serra Talhada?</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="rounded">
+                <legend class="m-0">Informações de Endereço</legend>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="cep" th:text="${enderecoEntity.cep}"></span>
+                        <label class="ms-2">CEP:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-9">
+                        <span class="form-control" id="logradouro" th:text="${enderecoEntity.logradouro}"></span>
+                        <label class="ms-2">Logradouro:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="numero" th:text="${enderecoEntity.numero}"></span>
+                        <label class="ms-2">Número:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-9">
+                        <span class="form-control" id="bairro" th:text="${enderecoEntity.bairro}"></span>
+                        <label class="ms-2">Bairro:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-9">
+                        <span class="form-control" id="localidade" th:text="${enderecoEntity.localidade}"></span>
+                        <label class="ms-2">Localidade:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-3">
+                        <span class="form-control" id="uf" th:text="${enderecoEntity.uf}"></span>
+                        <label class="ms-2">UF:</label>
+                    </div>
+                    <div class="form-floating col-md-12">
+                        <span class="form-control" id="referencia" th:text="${enderecoEntity.referencia}"></span>
+                        <label class="ms-2">Referência:</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="rounded">
+                <legend class="m-0">Informações de Contato</legend>
+                <div class="row">
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="celular1" th:text="${enderecoEntity.celular1}"></span>
+                        <label for="celular1" class="ms-2">Celular 01:</label>
+                    </div>
+                    <div class="form-floating mb-1 col-md-4">
+                        <span class="form-control" id="celular2" th:text="${enderecoEntity.celular2}"></span>
+                        <label for="celular2" class="ms-2">Celular 02:</label>
+                    </div>
+                    <div class="form-floating col-md-4">
+                        <span class="form-control" id="email" th:text="${enderecoEntity.email}"></span>
+                        <label for="email" class="ms-2">Email:</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="rounded mb-3">
+                <legend class="m-0">Composição Familiar</legend>
+                <p><strong>Você possui familiares residindo com você?</strong> <span id="possuiFamiliar" th:text="${composicaoFamiliarEntity.possuiFamiliar} == true ? 'SIM' : 'NÃO'"></span></p>
+                <div th:if="${composicaoFamiliarEntity.possuiFamiliar}">
+                    <strong>Listagem de Familiares</strong><br>
+                    <table class="table table-striped table-bordered responsive nowrap" id="tb_familiares_resumo" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Ordem</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Nascimento</th>
+                                <th>Sexo</th>
+                                <th>Parentesco</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </fieldset>
+            <form id="form5" method="post" th:action="@{/site/finalizar}" class="was-validated p-0" th:object="${finalizarCadastroDTO}">
+                <input type="hidden" id="idCidadao" name="idCidadao" th:value="${idCidadao}">
+                <div class="alert alert-success">
+                    <p>Declaro, sob as penas a lei (Art. 299 do Código Penal), que as declarações contidas neste formulário correspondem à verdade e comprometo-me a procurar a Secretaria Municipal de Habitação e Assuntos Fundiários (SEMHAF) para atualizá-las sempre que houver mudanças em relação às informações prestadas por mim neste cadastro.</p>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckConfirmacao" name="flexSwitchCheckConfirmacao" required th:field="${cidadaoEntity.finalizado}">
+                        <label class="form-check-label" for="flexSwitchCheckConfirmacao">Concordo que li a informação acima e estou ciente de que sou responsável pelos dados pessoais informados</label>
+                        <label th:if="${#fields.hasErrors('flexSwitchCheckConfirmacao')}" th:errors="*{flexSwitchCheckConfirmacao}" id="flexSwitchCheckConfirmacao-error" class="error invalid-feedback">Campo Obrigatório</label>
+                    </div>
+                    <p>Este cadastro é gratuito, o preenchimento deste não assegura a contemplação no referido programa. Este cadastro representa sua inscrição para posterior seleção. Em caso de seleção do candidato, essas declarações poderão ser verificadas junto ao FGTS, RAIS, CADMUT, CADIN, SACI e outros, pelo agente financiador.</p>
+                </div>
+                <div class="btn-group mt-2" role="group">
+                    <button type="button" class="btn btn-secondary" onclick="prevPage(5,4)">Anterior</button>
+                    <button class="btn btn-success" type="submit">Finalizar</button>
+                </div>
+            </form>
+        </div>
+        <div th:replace="base/table/familiares_resumo"/>
+    </section>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+    <section>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/v1/painel}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/v1/painel/cidadao/list}">Cadastro</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formulário de Cadastro</li>
+                </ol>
+            </nav>
+            <ul class="nav nav-tabs flex-column flex-sm-row">
+                <li class="nav-item">
+                    <span class="nav-link text-nowrap text-sm-wrap navTab" th:classappend="${nav1} ? 'active' : ''" id="tab1">
+                        <span th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''">
+                            <a href="#" onclick="mudarTab(1)" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''" th:if="${!#strings.isEmpty(cidadaoEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'bg-success' : 'bg-secondary'">1</span> Informações Pessoais
+                            </a>
+                            <div th:if="${#strings.isEmpty(cidadaoEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'bg-success' : 'bg-secondary'">1</span> Informações Pessoais
+                            </div>
+                        </span>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link text-nowrap text-sm-wrap navTab" th:classappend="${nav2} ? 'active' : ''" id="tab2">
+                        <span th:classappend="${!#strings.isEmpty(cidadaoDetalheEntity.id)} ? 'text-success' : ''">
+                            <a href="#" onclick="mudarTab(2)" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''" th:if="${!#strings.isEmpty(cidadaoDetalheEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoDetalheEntity.id)} ? 'bg-success' : 'bg-secondary'">2</span> Informações Adicionais
+                            </a>
+                            <div th:if="${#strings.isEmpty(cidadaoDetalheEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoDetalheEntity.id)} ? 'bg-success' : 'bg-secondary'">2</span> Informações Adicionais
+                            </div>
+                        </span>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link text-nowrap text-sm-wrap navTab" th:classappend="${nav3} ? 'active' : ''" id="tab3">
+                        <span th:classappend="${!#strings.isEmpty(enderecoEntity.id)} ? 'text-success' : ''">
+                            <a href="#" onclick="mudarTab(3)" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''" th:if="${!#strings.isEmpty(enderecoEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(enderecoEntity.id)} ? 'bg-success' : 'bg-secondary'">3</span> Informações de Endereço
+                            </a>
+                            <div th:if="${#strings.isEmpty(enderecoEntity.id)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(enderecoEntity.id)} ? 'bg-success' : 'bg-secondary'">3</span> Informações de Endereço
+                            </div>
+                        </span>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link text-nowrap text-sm-wrap navTab" th:classappend="${nav4} ? 'active' : ''" id="tab4">
+                        <span th:classappend="${!#strings.isEmpty(cidadaoEntity.possuiFamiliar) || possuiFamiliares} ? 'text-success' : ''">
+                            <a href="#" onclick="mudarTab(4)" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''" th:if="${!#strings.isEmpty(cidadaoEntity.possuiFamiliar)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoEntity.possuiFamiliar) || possuiFamiliares} ? 'bg-success' : 'bg-secondary'">4</span> Composição Familiar
+                            </a>
+                            <div th:if="${#strings.isEmpty(cidadaoEntity.possuiFamiliar)}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${!#strings.isEmpty(cidadaoEntity.possuiFamiliar) || possuiFamiliares} ? 'bg-success' : 'bg-secondary'">4</span> Composição Familiar
+                            </div>
+                        </span>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link text-nowrap text-sm-wrap navTab" th:classappend="${nav5} ? 'active' : ''" id="tab5">
+                        <span th:classappend="${cidadaoEntity.finalizado} ? 'text-success' : ''">
+                            <a href="#" onclick="mudarTab(5)" th:classappend="${!#strings.isEmpty(cidadaoEntity.id)} ? 'text-success' : ''" th:if="${cidadaoEntity.finalizado || codigo == 5}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${cidadaoEntity.finalizado} ? 'bg-success' : 'bg-secondary'">5</span> Resumo
+                            </a>
+                            <div th:if="${!cidadaoEntity.finalizado && codigo < 5}">
+                                <span class="badge rounded-circle me-1 circleTab" th:classappend="${cidadaoEntity.finalizado} ? 'bg-success' : 'bg-secondary'">5</span> Resumo
+                            </div>
+                        </span>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="card p-4 mb-3 rounded-0">
+                <div id="page1" th:classappend="${nav1} ? '' : 'd-none'" class="pageTab">
+                    <h2>Cadastro de Cidadão</h2>
+                    <th:block th:replace="site/formularios/cidadao :: formulario"></th:block>
+                </div>
+
+                <div id="page2" th:classappend="${nav2} ? '' : 'd-none'" class="pageTab">
+                    <h2>Informações de Adicionais</h2>
+                    <div th:if="${!#strings.isEmpty(cidadaoDetalheEntity.id)}">
+                        <th:block th:replace="site/formularios/adicionais :: formulario"></th:block>
+                    </div>
+                </div>
+
+                <div id="page3" th:classappend="${nav3} ? '' : 'd-none'" class="pageTab">
+                    <h2>Cadastro de Endereço</h2>
+                    <div th:if="${!#strings.isEmpty(enderecoEntity.id)}">
+                        <th:block th:replace="site/formularios/endereco :: formulario"></th:block>
+                    </div>
+                </div>
+
+                <div id="page4" th:classappend="${nav4} ? '' : 'd-none'" class="pageTab">
+                    <h2>Cadastro de Familiares</h2>
+                    <div th:if="${!#strings.isEmpty(cidadaoEntity.possuiFamiliar) || possuiFamiliares}">
+                        <th:block th:replace="site/formularios/familiares :: formulario"></th:block>
+                    </div>
+                </div>
+
+                <div id="page5" th:classappend="${nav5} ? '' : 'd-none'" class="pageTab">
+                    <h2>Resumo do Cadastro</h2>
+                    <div th:if="${cidadaoEntity.finalizado || viewResumo}">
+                        <th:block th:replace="site/formularios/resumo :: formulario"></th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" th:src="@{/assets/js/base_site_form.js}"></script>
+<!--        <script type="text/javascript" th:src="@{/assets/js/limpar_url.js}"></script>-->
+    </section>
+</body>
+</html>

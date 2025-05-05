@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+    <section>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">Home</li>
+                <li class="breadcrumb-item" aria-current="page">Configuração</li>
+                <li class="breadcrumb-item active" aria-current="page">Edição de Senha</li>
+            </ol>
+        </nav>
+        <div class="card">
+            <div class="card-body">
+                <form class="was-validated" id='validate_alterar' method='POST' th:object="${senhaDTO}">
+                    <div class="card">
+                        <div class="card-header">Alterar Senha</div>
+                        <div class="card-body">
+                            <div class="div-form row">
+                                <div class="form-group col-md-4">
+                                    <label for="atual">Senha atual</label>
+                                    <input class="form-control m" type="password" name="atual" id="atual" minlength="6" placeholder="Senha Atual" title="Campo obrigatório" required>
+                                    <span th:if="${#fields.hasErrors('atual')}" title="Campo obrigatório" class="error">Campo Obrigatório</span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="nova">Nova senha</label>
+                                    <input class="form-control m" type="password" name="nova" id="nova" minlength="6" placeholder="Nova Senha" title="Campo obrigatório" required>
+                                    <span th:if="${#fields.hasErrors('nova')}" title="Campo obrigatório" class="error">Campo Obrigatório</span>
+                                </div>
+                                <!--                                    <div class="form-group">-->
+                                <!--                                        <label for="nova2">Confirmar Nova senha</label>-->
+                                <!--                                        <input class="form-control m" type="password" name="nova2" id="nova2" placeholder="Confirmar Nova Senha" required>-->
+                                <!--                                    </div>-->
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-success text_btn_shd"><i class="fas fa-save"></i> Salvar</button>
+                                <a type="button" class="btn btn-warning text_btn_shd" th:href="@{/v1/painel/editar-senha}"><i class="fas fa-pen-square fs-5"></i> Limpar</a>
+                                <a type="button" class="btn btn-danger text_btn_shd" th:href="@{/v1/painel}"><i class="fas fa-window-close"></i> Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="base/fragments/head :: head-js-alterar-senha"/>
+    </section>
+</body>
+</html>

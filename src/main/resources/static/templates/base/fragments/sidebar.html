@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="navbar" th:remove="tag">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+            <span class="app-brand-link">
+                <span class="app-brand-logo demo"></span>
+                    <img class="logo_img" th:src="@{/assets/imagens/logo.jpg}" height="70" th:if="${themeRSD == 'core-dark.css'}">
+                    <img class="logo_img" th:src="@{/assets/imagens/logo.jpg}" height="70" th:if="${themeRSD == 'core2.css'}">
+                </span>
+            </span>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+        </div>
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item" th:classappend="${lk1} ? 'active' : ''">
+                <a th:href="@{/v1/painel}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Home </div>
+                </a>
+            </li>
+
+            <li class="menu-item" th:classappend="${lk2} ? 'active' : ''">
+                <a th:href="@{/v1/painel/cidadao/list}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Cadastros </div>
+                </a>
+            </li>
+
+            <li class="menu-item" th:classappend="${lk3} ? 'open active' : ''" sec:authorize="hasAnyRole('ADMINISTRADOR')">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                    <div data-i18n="Layouts">Configuração</div>
+                </a>
+
+                <ul class="menu-sub">
+                    <li class="menu-item" th:classappend="${lk_usuario} ? 'active' : ''">
+                        <a th:href="@{/v1/painel/usuario/list}" class="menu-link">
+                            <div data-i18n="Without navbar">Colaborador</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</div>
+</body>
+</html>

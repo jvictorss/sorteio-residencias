@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <th:block th:replace="base/fragments/head :: head-css-all"></th:block>
+</head>
+<div class="container_block">
+    <th:block th:replace="base/fragments/topbar :: topbar-time"></th:block>
+    <th:block th:replace="base/modal/modal :: modal"></th:block>
+    <div class="block_center">
+        <section>
+            <form action="#" name="validate_login" id="validate_login" method="post" class="block_shodow">
+                <h3 class="text-center text_topo">Solicitar nova senha</h3>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" autocomplete="@gmail.com">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">Solicitar</button>
+                </div>
+            </form>
+            <div class="pt-3 pe-3 text-right container3">
+                <span class="txt1"> Voltar para </span>
+                <a class="txt2" th:href="@{/login}">login </a>
+            </div>
+        </section>
+    </div>
+    <div th:replace="base/fragments/footer_principal :: footer"/>
+</div>
+<div th:replace="base/fragments/head :: head-js-base"/>
+<div th:replace="base/fragments/head :: head-js-recuperar"/>
+<th:block th:replace="base/fragments/mensagens"></th:block>
+</body>
+</html>

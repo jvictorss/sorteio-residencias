@@ -1,0 +1,25 @@
+.rodape {
+    background-color: #333; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto branco */
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+.coluna {
+    width: 20%;
+}
+
+.coluna h3 {
+    margin-bottom: 20px;
+}
+
+.coluna p {
+    margin-bottom: 10px;
+}
+
+.icones svg, .icones i {
+    width: 30px; /* Ajuste o tamanho dos ícones */
+    margin-right: 10px;
+    font-size: 20px;
+}

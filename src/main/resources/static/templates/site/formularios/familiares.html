@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head></head>
+<body>
+    <section th:fragment="formulario">
+        <form id="form4" method="post" th:action="@{/site/back/composicaofamiliar}" class="was-validated" th:object="${composicaoFamiliarEntity}">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <input type="hidden" id="id_cidadao" name="id_cidadao" th:value="${idCidadao}">
+            <input type="hidden" id="possuiFamiliar" name="possuiFamiliar" th:value="${possuiFamiliares}">
+            <div class="mb-3 alert alert-primary" th:if="${!possuiFamiliares}">
+                <label class="form-label">Você possui familiares residindo com você?</label>
+                <div class="form-check">
+                    <input class="form-check-input" th:errorclass="error" type="radio" id="possuiFamiliarSim" value="true" th:checked="*{possuiFamiliar} == true ? 'checked' : ''" th:field="*{possuiFamiliar}" required>
+                    <label class="form-check-label" for="possuiFamiliarSim">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" th:errorclass="error" type="radio" id="possuiFamiliarNao" value="false" th:checked="*{possuiFamiliar} == false ? 'checked' : ''" th:field="*{possuiFamiliar}" required>
+                    <label class="form-check-label" for="possuiFamiliarNao">Não</label>
+                    <label th:if="${#fields.hasErrors('possuiFamiliar')}" th:errors="*{possuiFamiliar}" id="possuiFamiliar-error" class="error invalid-feedback">Campo Obrigatório</label>
+                </div>
+            </div>
+            <div id="div-familiares" th:classappend="${possuiFamiliares}? '':'d-none'">
+                <div id="div-familiares1" class="mb-3" th:classappend="${viewResumo} ? '' :'d-none'">
+                    <button type="button" class="btn btn-primary" id="add-view-familiar">Adicionar Outro</button>
+                </div>
+                <fieldset class="mb-3 rounded" id="div-familiares2" th:classappend="${!viewResumo} ? '' :'d-none'">
+                    <legend>Informações do familiar</legend>
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="nomeDependente" class="form-label">Nome do Dependente:</label>
+                            <input type="text" th:errorclass="error" class="form-control minimoCaracter" id="nomeDependente" name="nomeDependente" th:field="*{nomeDependente}" required>
+                            <label th:if="${#fields.hasErrors('nomeDependente')}" th:errors="*{nomeDependente}" for="nomeDependente" id="nomeDependente-error" class="error invalid-feedback">Campo Obrigatório</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="cpfDependente" class="form-label">CPF do Dependente:</label>
+                            <input type="text" th:errorclass="error" class="form-control cpf documento" id="cpfDependente" name="cpfDependente" th:field="*{cpfDependente}" required>
+                            <label th:if="${#fields.hasErrors('cpfDependente')}" th:errors="*{cpfDependente}" for="cpfDependente" id="cpfDependente-error" class="error invalid-feedback">Campo Obrigatório</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="dataNascimentoDependente" class="form-label">Data de Nascimento do Dependente:</label>
+                            <input type="date" th:errorclass="error" class="form-control" id="dataNascimentoDependente" name="dataNascimentoDependente" th:field="*{dataNascimentoDependente}" required>
+                            <label th:if="${#fields.hasErrors('dataNascimentoDependente')}" th:errors="*{dataNascimentoDependente}" for="dataNascimentoDependente" id="dataNascimentoDependente-error" class="error invalid-feedback">Campo Obrigatório</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="sexoDependente" class="form-label">Sexo do Dependente:</label>
+                            <select class="form-select" th:errorclass="error" id="sexoDependente" name="sexoDependente" th:field="*{sexoDependente}" required>
+                                <option value="" selected>Selecione uma opção</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                            <label th:if="${#fields.hasErrors('sexoDependente')}" th:errors="*{sexoDependente}" for="sexoDependente" id="sexoDependente-error" class="error invalid-feedback">Campo Obrigatório</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="grauParentesco" class="form-label">Grau de Parentesco:</label>
+                            <select class="form-select" th:errorclass="error" id="grauParentesco" name="grauParentesco" th:field="*{grauParentesco}" required>
+                                <option value="" selected>Selecione uma opção</option>
+                                <option th:each="parentesco : ${T(gov.residenciais.enuns.GrauParentescoEnum).values()}"
+                                        th:value="${parentesco.name()}"
+                                        th:text="${parentesco.descricao}">
+                            </select>
+                            <label th:if="${#fields.hasErrors('grauParentesco')}" th:errors="*{grauParentesco}" for="grauParentesco" id="grauParentesco-error" class="error invalid-feedback">Campo Obrigatório</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="portadorDeficiencia" th:checked="*{portadorDeficiencia} == true ? 'checked' : ''" th:field="*{portadorDeficiencia}">
+                                <label class="form-check-label" for="portadorDeficiencia">É portador de necessidade especial?</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group mt-2" role="group">
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                        <button type="button" class="btn btn-danger" id="remove-view-familiar">Cancelar</button>
+                    </div>
+                </fieldset>
+
+                <div class="card">
+                    <div class="card-header">Familiares Cadastrados</div>
+                    <div class="card-body">
+                        <table class="table table-striped table-bordered responsive nowrap" id="tb_familiares" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Ordem</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Nascimento</th>
+                                    <th>Parentesco</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group mt-2" role="group">
+                <button type="button" class="btn btn-secondary" onclick="prevPage(4,3)">Anterior</button>
+                <button type="button" class="btn btn-primary btn-form4">Prosseguir</button>
+                <a class="btn btn-danger text_btn_shd" th:href="@{/site}"><i class="fas fa-window-close"></i> Cancelar</a>
+            </div>
+        </form>
+        <div th:replace="base/table/familiares"/>
+        <script type="text/javascript" th:inline="javascript">
+            $(".btn-form4").on("click", function() {
+                if([[${viewResumo}]] == false){
+                  if ($('input[name="possuiFamiliar"]:checked').val() === "true") {
+                    var nome = $("#nomeDependente").val();
+                    var cpf = $("#cpfDependente").val();
+                    var nascimento = $("#dataNascimentoDependente").val();
+                    var parentesco = $("#grauParentesco").val();
+                    var sexo = $("#sexoDependente").val();
+                    if(nome == "" || cpf == "" || nascimento == "" || parentesco == "" || sexo == ""){
+                        $("#form4").submit();
+                    }
+                    return;
+                  }
+                  if([[${cidadaoEntity.possuiFamiliar}]] == null){
+                    $("#form4").submit();
+                    return;
+                  }
+                }
+              nextPage(4,5);
+            });
+            function exibirDivFamiliares() {
+              if ($('input[name="possuiFamiliar"]:checked').val() === "true") {
+                document.getElementById('div-familiares').classList.remove('d-none');
+                document.getElementById('div-familiares1').classList.add('d-none');
+                document.getElementById('div-familiares2').classList.remove('d-none');
+                $("#possuiFamiliar").val(true);
+              } else {
+                document.getElementById('div-familiares').classList.add('d-none');
+                $("#possuiFamiliar").val(false);
+              }
+            }
+            $('[name="possuiFamiliar"]').on('change', exibirDivFamiliares);
+
+            $("#add-view-familiar").on("click", function() {
+                document.getElementById('div-familiares1').classList.add('d-none');
+                document.getElementById('div-familiares2').classList.remove('d-none');
+            });
+
+            $("#remove-view-familiar").on("click", function() {
+                document.getElementById('div-familiares1').classList.remove('d-none');
+                document.getElementById('div-familiares2').classList.add('d-none');
+            });
+        </script>
+    </section>
+</body>
+</html>

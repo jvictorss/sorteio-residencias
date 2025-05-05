@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title></title>
+    <th:div th:fragment="familiares-resumo" th:remove="tag">
+        <div th:replace="base/fragments/head :: head-base-datatable"/>
+        <script type="text/javascript" th:inline="javascript">
+            $(document).ready(function() {
+                $("#tb_familiares_resumo").DataTable({
+                    "language": {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado"
+                    },
+                    "responsive": true,
+                    "processing": true,
+                    "serverSide": true,
+                    info: false,
+                    ordering: false,
+                    paging: false,
+                    searching: false,
+                    "ajax": {
+                        "url": "/residenciais/site/back/composicaofamiliar/lista?idCidadao="+[[${idCidadao}]],
+                        "type": "GET"
+                    },
+                    "aoColumns": [
+                        {
+                            data: 'id'
+                        },
+                        {
+                            data: 'nomeDependente'
+                        },
+                        {
+                            data: 'cpfDependente'
+                        },
+                        {
+                            data: 'dataNascimentoDependente'
+                        },
+                        {
+                            data: 'sexoDependente'
+                        },
+                        {
+                            data: 'grauParentesco'
+                        }
+                    ]
+                });
+            });
+        </script>
+    </th:div>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title></title>
+    <th:div th:fragment="familiares" th:remove="tag">
+        <div th:replace="base/fragments/head :: head-base-datatable"/>
+        <script type="text/javascript" th:inline="javascript">
+            $(document).ready(function() {
+                $("#tb_familiares").DataTable({
+                    "language": {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLengthMenu": "Exibindo _MENU_ resultados por página",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "Próximo",
+                            "sPrevious": "Anterior",
+                            "sFirst": "Primeiro",
+                            "sLast": "Último"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    },
+                    "responsive": true,
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "/residenciais/site/back/composicaofamiliar/lista?idCidadao="+[[${idCidadao}]],
+                        "type": "GET"
+                    },
+                    "aoColumns": [
+                        {
+                            data: 'id'
+                        },
+                        {
+                            data: 'nomeDependente'
+                        },
+                        {
+                            data: 'cpfDependente'
+                        },
+                        {
+                            data: 'dataNascimentoDependente'
+                        },
+                        {
+                            data: 'sexoDependente'
+                        },
+                        {
+                            data: 'grauParentesco'
+                        },
+                        {
+                            data: 'criado',
+                            bSortable: false,
+                            render: function (data, type, row){
+                                return '<div class="d-flex align-items-center">'+
+                                       '  <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></a>'+
+                                       '     <div class="dropdown-menu dropdown-menu-end">'+
+                                       '       <a href="javascript:(0);" class="dropdown-item" id="srv-familiar" data-param="'+row.id+'/'+[[${idCidadao}]]+'"'+
+                                       '        data-nome="'+row.nomeDependente+'">Editar</a>'+
+                                       '       <div class="dropdown-divider"></div>'+
+                                       '       <a href="javascript:(0);" id="srv-remover-familiar" data-param="'+row.id+'/'+[[${idCidadao}]]+'"'+
+                                       '       data-nome="'+row.nomeDependente+'" class="dropdown-item text-danger">Remover</a>'+
+                                       '     </div>'+
+                                       '   </div>'+
+                                       ' </div>';
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
+    </th:div>
+</head>
+<body></body>
+</html>

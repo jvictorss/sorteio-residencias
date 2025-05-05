@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      th:replace="site/index :: index(~{::section})">
+<head></head>
+<body>
+    <section>
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/css/rsd_style_documentos.css}"/>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/site}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lista de Documentos</li>
+                </ol>
+            </nav>
+            <div class="lista-documentos mt-0 pt-0 mb-3">
+                <h2 class="text-center">LISTA DE DOCUMENTOS OBRIGATÓRIOS PARA O CADASTRO</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col-12 col-md-4">Documento necessário</th>
+                            <th class="col-12 col-md-4">Quem apresenta</th>
+                            <th class="col-12 col-md-4">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Documento Oficial com foto</td>
+                            <td>Todos os membros da composição familiar</td>
+                            <td>RG ou CNI-Carteira de identidade Nacional ou CNH</td>
+                        </tr>
+                        <tr>
+                            <td>CPF</td>
+                            <td>Todos os membros da composição familiar</td>
+                            <td>CPF (online ou físico)</td>
+                        </tr>
+                        <tr>
+                            <td>Comprovante de Endereço</td>
+                            <td>Somente do membro titular (em caso de aluguel, pode ser em nome do proprietário)</td>
+                            <td>Conta de energia ou conta de água</td>
+                        </tr>
+                        <tr>
+                            <td>Carteira de Trabalho</td>
+                            <td>Todos os membros acima de 16 anos</td>
+                            <td>Carteira de Trabalho física (pág.: Foto, dados, último registro e folha em branco seguinte)</td>
+                        </tr>
+                        <tr>
+                            <td>Título de Eleitor</td>
+                            <td>Todos os membros acima de 18 anos</td>
+                            <td>Título de eleitor físico ou certidão de quitação eleitoral</td>
+                        </tr>
+                        <tr>
+                            <td>Certidão de Nascimento/Casamento</td>
+                            <td>Todos os membros da composição familiar</td>
+                            <td>Certidão de Nascimento ou Certidão de Casamento; ou Se Divorciado (a): Certidão de Casamento com averbação ou Se Viúvo (a); Certidão de Casamento e Certidão de Óbito.</td>
+                        </tr>
+                        <tr>
+                            <td>Documento de União Estável</td>
+                            <td>Em caso de união estável de dois membros</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Folha Resumo do CADÚNICO</td>
+                            <td>Folha resumo de todos da família</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Contrato de locação do imóvel</td>
+                            <td>Contrato em nome de algum membro da família</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Extrato do Banco</td>
+                            <td>Dos membros que recebem benefícios</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Comprovante de Renda</td>
+                            <td>Todos os membros da composição familiar</td>
+                            <td>Extrato do INSS; ou Em caso de autônomos, fazer carta de próprio punho com o valor médio da renda mensal.</td>
+                        </tr>
+                        <tr>
+                            <td>Laudo médico</td>
+                            <td>Todas as pessoas deficientes da família</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Carta de aposentadoria</td>
+                            <td>Em nome dos membros que forem aposentados</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="observacao">Documentos aqui presentes podem variar conforme os dados apresentados pelos munícipes, é necessário que se conclua totalmente o cadastro para que verifique os documentos específicos que serão solicitados;</p>
+                <div class="text-center m-2">
+                    <a th:href="@{/site/consultar}" class="btn btn-primary">REALIZAR CADASTRO</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

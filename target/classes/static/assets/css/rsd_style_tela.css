@@ -1,0 +1,146 @@
+.layout-content-navbar .layout-page {
+    flex-basis: 100%;
+    flex-direction: column;
+    width: 0;
+    min-width: 0;
+    max-width: 100%
+}
+
+.layout-content-navbar .content-wrapper {
+    width: 100%
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: stretch;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.block_footer_site{
+    text-align: center;
+}
+
+.block_footer_site span{
+    font-size: 70%;
+}
+
+.layout-page {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    padding: 0
+}
+
+.layout-container {
+    min-height: 100vh
+}
+
+.layout-wrapper,.layout-container {
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch
+}
+
+.text-slid{
+  	display: inline-block;
+	font-family: 'Fira Sans', sans-serif;
+	padding: 7px 9px;
+	margin: 0;
+	color:#ffffff;
+	background:rgba(0, 0, 0, 0.6);
+	margin: 0 0 10px;
+	text-transform: none;
+	font-size: 30px;
+	width: auto;
+  }
+
+.header {
+ 	padding: 80px 15px;
+/*	padding: 150px 15px; */
+	overflow: hidden;
+	background: #099a97;
+	border-top: 5px solid #099a97;
+	border-bottom: 5px solid #099a97;
+	background-image: url("../../assets/imagens/site/banner_mcmv.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+}
+
+.header img{
+    height: 100%;
+}
+
+.h-group, .h-group h1, .h-group p {
+	margin: 0
+}
+
+.h-group {
+	float: left
+}
+
+.h-group h1 {
+	font-weight: 700;
+/* 	color: #255E8B; */
+	color: #ffffff;
+	font-size: 2.1em
+}
+
+.h-group p {
+	font-size: .62em;
+	color: #ffffff;
+/* 	color: #333 */
+}
+
+.layout-container {
+    min-height: 100vh
+}
+
+.layout-wrapper,.layout-container {
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch
+}
+
+.navbar-nav .nav-link.active{
+    color: rgb(228 20 44);
+}
+
+.nav-link{
+    color: rgb(177 14 14 / 65%);
+}
+
+.card-title-consulta{
+    height: 50px;
+    padding: 0px;
+    align-content: center;
+}
+
+.card-consulta{
+    width: 300px;
+}
+
+#navbarSupportedContent{
+    font-size: 20px;
+    color: #e4142c;
+}
+
+#navbarSupportedContent:hover{
+    color: black;
+}
+
+.navbar-menu {
+    margin-top: 15px;
+    border: 1px solid;
+    border-radius: var(--bs-border-radius);
+    border-color: var(--bs-border-color-translucent);
+}
+
+.dropdown-toggle.hide-arrow::before,.dropdown-toggle.hide-arrow::after,.dropdown-toggle-hide-arrow>.dropdown-toggle::before,.dropdown-toggle-hide-arrow>.dropdown-toggle::after {
+    display: none
+}

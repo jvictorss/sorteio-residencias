@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <title></title>
+</head>
+<body>
+    <th:div th:fragment="topbar">
+        <div class="block_top">
+            <div class="block_top_25"></div>
+            <div class="block_top_75"></div>
+        </div>
+    </th:div>
+    <th:div th:fragment="topbar-time">
+        <div class="block_top">
+            <nav class="navbar navbar-top navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <img class="navbar-brand" th:src="@{/assets/imagens/color2.png}" height="90"></img>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-3" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div>
+                        <a class="btn-lgn btn" th:href="@{/site}">Site</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </th:div>
+    <th:div th:fragment="navbar">
+        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+             id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                    <i class="bx bx-menu bx-sm"></i>
+                </a>
+            </div>
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                <ul class="navbar-nav flex-row align-items-center ms-auto">
+<!--                    <li class="nav-item lh-1 me-3">-->
+<!--                        <a class="nav-link dropdown-toggle hide-arrow" th:href="@{/back/painel/avisos}">-->
+<!--                            <div>-->
+<!--                                <span>Avisos</span>-->
+<!--                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20" th:text="${session.avisos}"></span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+                    <!-- Theme -->
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i id="icon-theme" th:class="'bx bx-sm '+ ${iconTheme}"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" id="btn-sun" data-theme="light">
+                                    <span class="align-middle"><i class="bx bx-sun me-2"></i>Light</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" id="btn-moon" data-theme="dark">
+                                    <span class="align-middle"><i class="bx bx-moon me-2"></i>Dark</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--/ Theme -->
+                    <!-- User -->
+                    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                            <div class="avatar avatar-online">
+                                <img th:src="${(#authentication.getPrincipal().getSexo() == 'Masculino')?'/residenciais/assets/imagens/user1.png' : '/residenciais/assets/imagens/user2.png'}" alt="" class="w-px-40 h-auto rounded-circle">
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" data-backdrop="static">
+                            <li>
+                                <div class="d-flex ms-3">
+                                    <div class="flex-grow-1">
+                                        <span class="fw-semibold d-block" th:with="strarray=${#strings.arraySplit(#authentication.getPrincipal().getNome(),' ')}" th:text="${strarray.length > 1? strarray[0]+' '+strarray[1]: strarray[0]}"></span>
+                                        <small class="text-muted" th:text="${#strings.replace(#authentication.getPrincipal().getTipo(),'ROLE_','')}"></small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li sec:authorize="hasAnyRole('ADMINISTRADOR')">
+                                <a class="dropdown-item" th:href="@{/v1/colaborador/editar-cadastro}">
+                                    <i class="bx bx-user me-2"></i>
+                                    <span class="align-middle">Meu Cadastro</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/v1/painel/editar-senha}">
+                                    <i class="fa-solid fa-right-left"></i>
+                                    <span class="align-middle">Alterar Senha</span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--/ User -->
+                </ul>
+            </div>
+        </nav>
+    </th:div>
+</body>
+</html>

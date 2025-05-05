@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <th:div th:fragment="graficos">
+        <script th:inline="javascript" >
+            $(document).ready(function () {
+                // chart colors
+                var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+                <!--/* large line chart */-->
+                var chLine = document.getElementById("chLine");
+                var chartData = {
+                  labels: ["S", "M", "T", "W", "T", "F", "S"],
+                  datasets: [{
+                    label: 'TIPO-01',
+                    data: [[${data1}]],
+                    backgroundColor: 'transparent',
+                    borderColor: colors[0],
+                    borderWidth: 4,
+                    pointBackgroundColor: colors[0]
+                  },
+                  {
+                    label: 'TIPO-02',
+                    data: [[${data2}]],
+                    backgroundColor: colors[3],
+                    borderColor: colors[1],
+                    borderWidth: 4,
+                    pointBackgroundColor: colors[1]
+                   }
+                  ],
+                  options: {
+                      scales: {
+                        x: {
+                          type: 'time',
+                          display: true,
+                          title: {
+                            display: true,
+                            text: 'Date'
+                          }
+                        },
+                        y: {
+                          display: true,
+                          title: {
+                            display: true,
+                            text: 'value'
+                          }
+                        }
+                      }
+                  }
+                };
+                if (chLine) {
+                  new Chart(chLine, {
+                  type: 'line',
+                  data: chartData
+                 });
+                }
+
+                var chBar = document.getElementById("chBar");
+                if (chBar) {
+                  new Chart(chBar, {
+                      type: 'bar',
+                      data: {
+                        labels: ["S", "M", "T", "W", "T", "F", "S"],
+                        datasets: [{
+                          data: [589, 445, 483, 503, 689, 692, 634],
+                          label: 'TIPO-01',
+                          backgroundColor: colors[0]
+                        },
+                        {
+                          data: [639, 465, 493, 478, 589, 632, 674],
+                          label: 'TIPO-02',
+                          backgroundColor: colors[1]
+                        }]
+                      }
+                  });
+                }
+
+                var chPolar = document.getElementById("chPolar");
+                const data = {
+                  labels: [
+                    'Red',
+                    'Green',
+                    'Yellow',
+                    'Grey',
+                    'Blue'
+                  ],
+                  datasets: [{
+                    label: 'My First Dataset',
+                    data: [11, 16, 7, 3, 14],
+                    backgroundColor: [
+                      'rgb(255, 99, 132)',
+                      'rgb(75, 192, 192)',
+                      'rgb(255, 205, 86)',
+                      'rgb(201, 203, 207)',
+                      'rgb(54, 162, 235)'
+                    ]
+                  }]
+                };
+            if (chPolar) {
+              new Chart(chPolar, {
+                  type: 'polarArea',
+                  data: data
+              });
+            }
+
+<!--https://codepen.io/anonymous_viewer/pen/NWrprmQ-->
+            });
+        </script>
+    </th:div>
+</head>
+<body>
+</body>
+</html>

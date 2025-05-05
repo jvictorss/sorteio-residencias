@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      th:replace="site/index :: index(~{::section})">
+<head></head>
+<body>
+    <section>
+        <header class="container-fluid header">
+            <div class="wrapper">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 sec-name">
+                        <div class="wrapper text-slid">
+                            <div class="h-group">
+                                <h1>Secretaria de Assistência Social</h1>
+                                <p>Um novo olhar para o povo Serratalhadense</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </section>
+    <section class="mt-4 mb-3">
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/css/rsd_style_card_home.css}"/>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-sm-6">
+                    <div class="card h-100 block_shodow conteudo">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <h5 class="card-title text-center mb-3">Sobre o Programa</h5>
+                            <p class="card-text text-center">O programa habitacional visa garantir o direito à moradia para famílias carentes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 align-self-center">
+                    <div class="h-100">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <h5 class="card-title text-center mb-3">Documentação Necessária</h5>
+                            <p class="card-text text-center">Veja a lista dos documentos obrigatórios no momento do cadastro.</p>
+                            <a th:href="@{/site/documentos}" class="btn btn-primary">Acesse aqui</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-4 mb-3 faixa">
+        <div class="container p-5 text-center">
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <h2 class="pb-3">Cadastro habitacional</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-sm-6 m-auto mt-4">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fa-solid fa-user-plus mb-3" style="font-size: 80px;"></i>
+                                    <a th:href="@{/site/consultar}" class="btn btn-primary">REALIZAR CADASTRO</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" th:if="false">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fa-solid fa-user-pen mb-3" style="font-size: 80px;"></i>
+                                    <a href="#" class="btn btn-primary">ATUALIZAR CADASTRO</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2 class="pb-3">Resumo famílias cadastradas</h2>
+                    <div class="col-12 col-md-8 m-auto">
+                        <div class="detalhe card mb-3">
+                            <i class="fa-solid fa-users col-sm-2"></i>
+                            <div class="texto-detalhe col-sm-10">
+                                <p><b>TOTAL</b></p>
+                                <p th:text="${estatistico.totalCadastros}"></p>
+                            </div>
+                        </div>
+                        <div class="detalhe card mb-3">
+                            <i class="fa-solid fa-venus col-md-2"></i>
+                            <div class="texto-detalhe col-md-10">
+                                <p><b>MULHER CHEFE</b></p>
+                                <p th:text="${estatistico.totalMulherChefe}"></p>
+                            </div>
+                        </div>
+                        <div class="detalhe card">
+                            <i class="fa-solid fa-wheelchair col-md-2"></i>
+                            <div class="texto-detalhe col-md-10">
+                                <p><b>COM PCD</b></p>
+                                <p th:text="${estatistico.totalPCD}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

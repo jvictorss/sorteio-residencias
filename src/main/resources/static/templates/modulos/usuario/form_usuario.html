@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+    <head></head>
+    <body>
+    <section>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/painel}">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/painel/usuario/list}">Usuário</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Formulário</li>
+            </ol>
+        </nav>
+        <form id="validate_usuario" th:action="@{/v1/usuario/enviar}" method="post" class="was-validated" th:object="${usuario}">
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+                <input type="hidden" id="senha" name="senha" value="1">
+                <input type="hidden" class="metodo" th:value="${metodo}">
+                <input type="hidden" class="retorno" th:value="@{/v1/painel/usuario/list}">
+<!--                <input type="hidden" class="retorno" th:value="@{#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'?'/v1/painel/usuario/list':'/v1/painel'">-->
+                <input type="hidden" class="url" th:value="@{/v1/usuario}">
+                <div class="card">
+                    <div class="card-header">Cadastro de Usuário <a th:href="@{/v1/painel/usuario/list}" style="float: right;" id="lk1"><i class="fas fa-clipboard-list"></i> Exibir Cadastrados</a></div>
+                    <div class="card-body">
+                        <div class="form-group col-md-9">
+                            <label for="nome">Nome</label> <label class="cor_red">*</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" th:field="*{nome}" required>
+                            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cpf">CPF</label> <label class="cor_red">*</label>
+                            <input type="text" class="form-control cpf documento" id="cpf" name="cpf" placeholder="cpf" th:field="*{cpf}" required>
+                            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sexo">Sexo</label> <label class="cor_red">*</label>
+                            <select class="form-control" id="sexo" name="sexo" th:field="*{sexo}" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label> <label class="cor_red">*</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" th:field="*{email}" required>
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-3" th:if="${#authentication.getPrincipal().getTipo()} != 'ROLE_ADMINISTRADOR'">
+                            <input class="form-control" type="hidden" name="tipo" th:field="*{tipo}">
+                        </div>
+                        <div class="form-group col-md-3" th:if="${#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'">
+                            <label for="tipo">Tipo</label> <label class="cor_red">*</label>
+                            <select class="form-control" id="tipo" name="tipo" th:field="*{tipo}" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="ROLE_ADMINISTRADOR">Administrador</option>
+                                <option value="ROLE_USUARIO">Servidor(a)</option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="observacao">Observação</label>
+                            <input type="text" class="form-control" id="observacao" name="observacao" placeholder="Observação" th:field="*{observacao}">
+                            <span th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}" class="error">Campo Obrigatório</span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="submit" class="btn btn-success text_btn_shd"><i class="fas fa-save"></i> Salvar</button>
+                            <a type="button" class="btn btn-warning text_btn_shd" th:if="${#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'" th:href="@{/v1/painel/usuario/form}"><i class="fas fa-pencil"></i> Limpar</a>
+                            <a type="button" class="btn btn-danger text_btn_shd" th:if="${#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'" th:href="@{/v1/painel/usuario/list}"><i class="fas fa-window-close"></i> Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <th:block th:replace="base/fragments/head :: head-js-base-envio"/>
+    </section>
+   </body>
+</html>

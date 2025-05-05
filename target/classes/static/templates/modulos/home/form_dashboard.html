@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+    <section>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+        <div class="card">
+            <div class="card-body">
+                <div class="card bg-transparent shadow-none border-0 my-2">
+                    <div class="card-body row p-0">
+                        <div class="col-12 col-md-8 card-separator border-0">
+                            <h3>Bem <span th:text="${(#authentication.getPrincipal().getSexo() == 'Masculino')?'vindo' : 'vinda'}"></span>,
+                                <span th:with="strarray=${#strings.arraySplit(#authentication.getPrincipal().getNome(),' ')}" th:text="${strarray.length > 1? strarray[0]+' '+strarray[1]: strarray[0]}"></span> 👋🏻</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2 d-none">
+                    <div class="col-md-6 py-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="chLine"></canvas>
+                                <canvas id="chBar"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="chPolar"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <th:block th:replace="base/scripts/scripts_graficos :: graficos"></th:block>
+    </section>
+</body>
+</html>

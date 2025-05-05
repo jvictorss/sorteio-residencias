@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title></title>
+    <th:div th:fragment="cidadao">
+        <div th:replace="base/fragments/head :: head-base-datatable"/>
+        <script type="text/javascript" th:inline="javascript">
+            $(document).ready(function() {
+                $('table').DataTable({
+                    "language": {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLengthMenu": "Exibindo _MENU_ resultados por página",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "Próximo",
+                            "sPrevious": "Anterior",
+                            "sFirst": "Primeiro",
+                            "sLast": "Último"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    },
+                    "responsive": true,
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "/residenciais/site/back/cidadao/listar",
+                        "type": "GET"
+                    },
+                    "aoColumns": [
+                        {
+                            data: 'id'
+                        },
+                        {
+                            data: 'nome',
+                            render:function (data){
+                                if(data == null){return "";}
+                                var splited = data.split(" ");
+                                if(data!=='' && splited.length>4){
+                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
+                                }else{
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'cpf'
+                        },
+                        {
+                            data: 'criado',
+                            bSortable: false,
+                            render: function (data, type, row){
+                                var status = "Ativo";
+                                var tipo = "Ativar";
+                                var stylo = "text-success";
+                                if(row.ativo){
+                                    status = "Inativo";
+                                    tipo = "Inativar";
+                                    stylo = "text-danger";
+                                }
+                                return '<div class="d-flex align-items-center">'+
+                                       '  <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></a>'+
+                                       '     <div class="dropdown-menu dropdown-menu-end">'+
+                                       '       <a href="/residenciais/site/back/cidadao/visualizar?documento='+row.cpf+'" class="dropdown-item">Visualizar</a>'+
+                                       '   </div>'+
+                                       ' </div>';
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
+    </th:div>
+</head>
+<body></body>
+</html>

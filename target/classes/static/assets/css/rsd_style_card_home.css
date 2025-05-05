@@ -1,0 +1,87 @@
+.titulo {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.conteudo {
+    border: 2px solid #a52a2a; /* Cor da borda do retângulo */
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.conteudo::before {
+    content: '';
+    position: relative;
+    left: -80px;
+    width: 250px; /* Ajuste o tamanho da linha */
+    height: 2px;
+    background-color: #a52a2a; /* Cor da linha */
+}
+
+.conteudo::after {
+    content: '';
+    position: relative;
+    align-self: self-end;
+    right: -80px;
+    width: 250px;
+    height: 2px; /* Ajuste o tamanho da linha */
+    background-color: #a52a2a; /* Cor da linha */
+}
+
+.conteudo p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.faixa{
+   background-color: #099a97;
+}
+
+.detalhe {
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+}
+
+.detalhe img, .detalhe i, .detalhe svg {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.texto-detalhe {
+    padding-right: 15px;
+    text-align: right;
+}
+
+.texto-detalhe p {
+    margin: 0;
+}
+
+@media (max-width: 991.98px) {
+    .conteudo::before {
+        left: -30px;
+        width: 200px;
+    }
+
+    .conteudo::after {
+        right: -30px;
+        width: 200px;
+    }
+
+    .detalhe {
+        display: block;
+        padding: 10px;
+    }
+
+    .detalhe img, .detalhe i, .detalhe svg {
+        font-size: 30px;
+        margin-right: 0px;
+    }
+
+    .texto-detalhe {
+        padding-right: 0px;
+        text-align: center;
+    }
+}

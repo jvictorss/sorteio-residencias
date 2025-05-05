@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sistema de Sorteio Auditável</title>
+  <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #nomeListContainer {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 20px;
+        }
+
+        #historicoSorteios {
+            margin-top: 30px;
+            text-align: left;
+            width: 100%;
+        }
+
+        #historicoSorteios h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #historicoSorteios ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #historicoSorteios li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .auditavel {
+            color: #777;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <h1>Sistema de Sorteio Auditável</h1>
+  <form method="post">
+    <div id="nomeListContainer">
+      <label for="nomes">Lista de Nomes (um por linha):</label>
+      <textarea id="nomes" rows="5" style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"
+                th:field="${nomeFormDto.nomes}"></textarea>
+      <p th:if="${#fields.hasErrors('nomeFormDto.nomes')}" th:errors="*{nomeFormDto.nomes}" style="color: red;"></p>
+    </div>
+
+    <button th:formaction="@{/sortear}" method="post">Sortear Nome</button>
+  </form>
+  <div th:if="${nomeSorteado}">
+    <h2 id="resultado">Nome Sorteado: <span th:text="${nomeSorteado}"></span></h2>
+  </div>
+
+  <div id="historicoSorteios">
+    <h2>Histórico de Sorteios</h2>
+    <ul th:if="${not #lists.isEmpty(historico)}">
+      <li th:each="sorteioDto : ${historico}">
+        Nome: <span th:text="${sorteioDto.nomeSorteado}"></span>
+        <p class="auditavel">Realizado em: <span th:text="${#temporals.format(sorteioDto.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+<!--        <p class="auditavel">Realizado em: <span th:text="${{sorteioDto.dataHora}}"></span></p>-->
+      </li>
+    </ul>
+    <p th:if="${#lists.isEmpty(historico)}">Nenhum sorteio realizado ainda.</p>
+  </div>
+</div>
+</body>
+</html>
