@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "rodape",
+      "type": "gov.sorteio.dto.RodapeDTO",
+      "sourceType": "gov.sorteio.config.Beans",
+      "sourceMethod": "rodapeDTO()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rodape.text-copyright",
+      "type": "java.lang.String",
+      "sourceType": "gov.sorteio.dto.RodapeDTO"
+    },
+    {
+      "name": "rodape.text-local",
+      "type": "java.lang.String",
+      "sourceType": "gov.sorteio.dto.RodapeDTO"
+    }
+  ],
+  "hints": []
+}

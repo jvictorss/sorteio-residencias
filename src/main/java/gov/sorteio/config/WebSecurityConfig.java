@@ -14,7 +14,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -56,17 +58,39 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
+
+    @Bean
     public SecurityFilterChain filterAppChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/**").permitAll()
-                .anyRequest().authenticated();
-
-        http.authenticationProvider(authenticationProvider());
-
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
+        http.csrf().disable()
+                // The pages does not require login
+                .authorizeRequests()
+                .antMatchers("/v1/login/**", "/site/**").permitAll()
+                .anyRequest().authenticated()
+                .filterSecurityInterceptorOncePerRequest(true)
+                .and().exceptionHandling()
+                .accessDeniedPage("/v1/login?logout=true")
+                // Config for Login Form
+                .and().formLogin()
+                // Submit URL of login page.
+                .loginProcessingUrl("/v1/j_spring_security_check") // Submit URL
+                .loginPage("/v1/login")
+                .defaultSuccessUrl("/v1/painel",true)
+                .permitAll()
+                .failureUrl("/v1/login?exception")
+                .failureHandler(authenticationFailureHandler())
+                .usernameParameter("email")
+                .passwordParameter("senha")
+                // Config for Logout Page
+                .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/v1/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+        http.headers().frameOptions().disable();
         return http.build();
     }
 }

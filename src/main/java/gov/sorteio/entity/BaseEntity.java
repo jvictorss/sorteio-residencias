@@ -5,15 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
 @MappedSuperclass
 public class BaseEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Boolean ativo = null;
 
@@ -23,9 +28,9 @@ public class BaseEntity implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime atualizado;
 
-    private UUID idUser;
+    private Long idUser;
 
-    private UUID idUserAtualizou;
+    private Long idUserAtualizou;
 
     @Column(unique = true)
     private String hash;

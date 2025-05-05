@@ -28,7 +28,7 @@ public class UserDetails implements UserDetailsService {
 
         user.orElseThrow(() -> new UsernameNotFoundException(email + " Não encontrado."));
 
-        if("Inativo".equals(user.get().getAtivo())){
+        if(user.get().getAtivo().equals(Boolean.FALSE)){
             throw GenericException.builder()
                     .code(ErrorCodesEnum.COD_USUARIO.getCodigo())
                     .title("Erro ao efetuar login")

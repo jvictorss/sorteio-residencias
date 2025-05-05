@@ -16,14 +16,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -31,50 +30,40 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-@Entity()
-@Table(name = "colaborador")
-public class ColaboradorEntity extends BaseEntity implements UserDetails, Serializable {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id", updatable = false, unique = true, nullable = false)
-//    private UUID id;
-
-    @Column(name = "nome")
+@Entity
+@Table(name = "tb_usuario")
+@SequenceGenerator(
+        name = "sq_user_id",
+        sequenceName = "sq_user_id",
+        allocationSize = 1
+)
+public class UsuarioEntity extends BaseEntity implements UserDetails {
     @NotNull
     @NotBlank
     private String nome;
 
-    @Column(name = "cpf")
     @NotNull
     @NotBlank
     @Cpf
     private String cpf;
 
-    @Column(name = "email", unique = true)
-    @NotNull
-    @NotBlank
-    private String email;
-
-    @Column(name = "senha")
-    @NotNull
-    @NotBlank
-    private String senha;
-
-    @Column(name = "sexo")
     @NotNull
     @NotBlank
     private String sexo;
 
-    @Column(name = "observacao")
-    private String observacao;
+    @Column(unique = true)
+    @NotNull
+    @NotBlank
+    @Email
+    private String email;
 
-    @Transient
-    private String token;
+    private String senha;
 
-    @Column(name = "tipo")
     @NotNull
     @NotBlank
     private String tipo;
+
+    private String observacao;
 
     @Override
     @JsonIgnore
