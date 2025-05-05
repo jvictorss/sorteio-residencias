@@ -58,7 +58,7 @@
                     <label for="raca" class="form-label">Raça:</label>
                     <select class="form-select" th:errorclass="error" id="raca" name="raca" th:field="*{raca}" required>
                         <option value="">Selecione uma opção</option>
-                        <option th:each="raca : ${T(gov.residenciais.enuns.RacaEnum).values()}"
+                        <option th:each="raca : ${T(gov.sorteio.enuns.RacaEnum).values()}"
                                 th:value="${raca.name()}"
                                 th:text="${raca.descricao}">
                     </select>
@@ -77,7 +77,7 @@
                     <label for="estadoCivil" class="form-label">Estado Civil:</label>
                     <select class="form-select" th:errorclass="error" id="estadoCivil" name="estadoCivil" th:field="*{estadoCivil}" required>
                         <option value="">Selecione uma opção</option>
-                        <option th:each="estadoCivil : ${T(gov.residenciais.enuns.EstadoCivilEnum).values()}"
+                        <option th:each="estadoCivil : ${T(gov.sorteio.enuns.EstadoCivilEnum).values()}"
                                 th:value="${estadoCivil.name()}"
                                 th:text="${estadoCivil.descricao}">
                     </select>
@@ -99,7 +99,7 @@
                     <label for="estadoNascimento" class="form-label">Estado de Nascimento:</label>
                     <select class="form-select" th:errorclass="error" id="estadoNascimento" name="estadoNascimento" th:field="*{estadoNascimento}" required>
                         <option value="" selected>Selecione uma opção</option>
-                        <option th:each="estado : ${T(gov.residenciais.enuns.EstadosEnum).values()}"
+                        <option th:each="estado : ${T(gov.sorteio.enuns.EstadosEnum).values()}"
                                 th:value="${estado}"
                                 th:text="${estado.descricao}">
                     </select>
@@ -116,7 +116,7 @@
                     <label for="escolaridade" class="form-label">Escolaridade:</label>
                     <select class="form-select" th:errorclass="error" id="escolaridade" name="escolaridade" th:field="*{escolaridade}" required>
                         <option value="">Selecione uma opção</option>
-                        <option th:each="escolaridade : ${T(gov.residenciais.enuns.EscolaridadeEnum).values()}"
+                        <option th:each="escolaridade : ${T(gov.sorteio.enuns.EscolaridadeEnum).values()}"
                                 th:value="${escolaridade.name()}"
                                 th:text="${escolaridade.descricao}">
                     </select>

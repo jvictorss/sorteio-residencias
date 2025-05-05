@@ -18,7 +18,7 @@ $(document).ready(function(key, form){
             var retorno = $(".retorno",form).val();
             var usaRetorno = $(".usaRetorno",form).val();
             var url = $(".url",form).val();
-            var servico = url.replaceAll("/residenciais/v1/","");
+            var servico = url.replaceAll("/sorteio/v1/","");
             var forms = $("#validate_tombamento")[0];
             var dados = new FormData(forms);
             //do something here

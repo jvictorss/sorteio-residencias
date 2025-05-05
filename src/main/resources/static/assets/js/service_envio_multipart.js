@@ -12,7 +12,7 @@ $(document).ready(function(){
       },
       submitHandler : function(form) {
         $("input, textarea, select").prop("disabled", false);
-        $("#div_resultado").html("<img src='/residenciais/assets/imagens/ajax-loader.gif' style='height:30px;'></img> Efetuando operação...");
+        $("#div_resultado").html("<img src='/sorteio/assets/imagens/ajax-loader.gif' style='height:30px;'></img> Efetuando operação...");
         $("#modal_elemento").modal("show");
         setTimeout(function() {
             // capture o formulário
@@ -20,7 +20,7 @@ $(document).ready(function(){
             // crie um FormData {Object}
             var data = new FormData(forms);
             $.ajax({
-                url : "/residenciais/site/salvarSolicitacao",
+                url : "/sorteio/site/salvarSolicitacao",
                 method: "POST",
                 type: "POST",
                 enctype: 'multipart/form-data',

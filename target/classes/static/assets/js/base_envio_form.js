@@ -18,7 +18,7 @@ $(document).ready(function(key, form){
             var retorno = $(".retorno",form).val();
             var usaRetorno = $(".usaRetorno",form).val();
             var url = $(".url",form).val();
-            var servico = url.replaceAll("/residenciais/v1/","");
+            var servico = url.replaceAll("/sorteio/v1/","");
             var dados = $(form).serializeArray();
             //do something here
             $("#div_resultado").html("<div class='d-flex align-items-center justify-content-center ms-auto'>"+

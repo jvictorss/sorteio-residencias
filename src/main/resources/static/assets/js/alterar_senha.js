@@ -9,7 +9,7 @@ $(document).ready(function(){
         var dados = $( form ).serialize();
         setTimeout(function() {
             $.ajax({
-                url : "/residenciais/v1/usuario/senha",
+                url : "/sorteio/v1/usuario/senha",
                 data: dados,
                 processData: false,
                 method: 'POST',

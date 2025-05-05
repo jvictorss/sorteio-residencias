@@ -61,7 +61,7 @@ public class UsuarioBO extends BaseBO<UsuarioEntity, Long> {
         }
         usuario.setSenha(new BCryptPasswordEncoder().encode(senhaDTO.getNova()));
         usuarioRepository.save(usuario);
-        return "/residenciais/logout";
+        return "/sorteio/logout";
     }
 
     public String recuperarLogin(String email, HttpSession session) {
@@ -76,15 +76,15 @@ public class UsuarioBO extends BaseBO<UsuarioEntity, Long> {
         }
         String msg = "Usuário não encontrado no Banco de Dados para recuperação de senha.";
         session.setAttribute(ERROR, gerarErrorDTO(CODIGO, TITLE_GENERIC, msg));
-        return "/residenciais/v1/login".concat(ROTA_EXCEPTION);
+        return "/sorteio/v1/login".concat(ROTA_EXCEPTION);
     }
 
     public String enviarEmail(String email, String titulo, String mensagem, String msgError, HttpSession session) {
         String envio = serviceEmail.enviar(email, titulo, mensagem);
         if(Objects.isNull(envio)){
             session.setAttribute(ERROR, gerarErrorDTO(ErrorCodesEnum.COD_EMAIL.getCodigo(),TITLE_GENERIC,msgError));
-            return "/residenciais/v1/login".concat(ROTA_EXCEPTION);
+            return "/sorteio/v1/login".concat(ROTA_EXCEPTION);
         }
-        return "/residenciais/v1/login";
+        return "/sorteio/v1/login";
     }
 }

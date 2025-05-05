@@ -16,21 +16,21 @@
 //});
 $(document).ready(function(){
     $("#btn-sun").on("click",function(){
-        $("#rel-theme1").attr("href","/residenciais/assets/vendor/css/theme-default.css");
-        $("#rel-theme2").attr("href","/residenciais/assets/vendor/css/core2.css");
+        $("#rel-theme1").attr("href","/sorteio/assets/vendor/css/theme-default.css");
+        $("#rel-theme2").attr("href","/sorteio/assets/vendor/css/core2.css");
         $("#icon-theme").removeClass("bx-moon");
         $("#icon-theme").addClass("bx-sun");
-        $(".logo_img").attr("src","/residenciais/assets/imagens/logo.jpg");
+        $(".logo_img").attr("src","/sorteio/assets/imagens/logo.jpg");
         document.cookie = "themeBordRSD=theme-default.css; path=/";
         document.cookie = "themeRSD=core2.css; path=/";
         document.cookie = "iconTheme=bx-sun; path=/";
     });
     $("#btn-moon").on("click",function(){
-        $("#rel-theme1").attr("href","/residenciais/assets/vendor/css/theme-dark.css");
-        $("#rel-theme2").attr("href","/residenciais/assets/vendor/css/core-dark.css");
+        $("#rel-theme1").attr("href","/sorteio/assets/vendor/css/theme-dark.css");
+        $("#rel-theme2").attr("href","/sorteio/assets/vendor/css/core-dark.css");
         $("#icon-theme").removeClass("bx-sun");
         $("#icon-theme").addClass("bx-moon");
-        $(".logo_img").attr("src","/residenciais/assets/imagens/logo.jpg");
+        $(".logo_img").attr("src","/sorteio/assets/imagens/logo.jpg");
         document.cookie = "themeBordRSD=theme-dark.css; path=/";
         document.cookie = "themeRSD=core-dark.css; path=/";
         document.cookie = "iconTheme=bx-moon; path=/";

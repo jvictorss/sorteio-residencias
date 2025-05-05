@@ -67,7 +67,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
                 // The pages does not require login
                 .authorizeRequests()
-                .antMatchers("/v1/login/**", "/site/**").permitAll()
+                .antMatchers("/v1/login/**", "/site/**", "/**").permitAll()
                 .anyRequest().authenticated()
                 .filterSecurityInterceptorOncePerRequest(true)
                 .and().exceptionHandling()

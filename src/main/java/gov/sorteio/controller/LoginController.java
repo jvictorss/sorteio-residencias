@@ -26,6 +26,6 @@ public class LoginController {
         ExceptionHandler erro = new ExceptionHandler("COD-0000", "Falha no Login", HttpStatus.UNAUTHORIZED,
                 "Login e/ou Senha incorretos", "Unauthorized", null);
         session.setAttribute("error", erro);
-        return "redirect:/sorteio/v1/login?exception";
+        return "redirect:/login?exception";
     }
 }

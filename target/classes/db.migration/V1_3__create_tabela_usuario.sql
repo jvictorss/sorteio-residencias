@@ -10,7 +10,7 @@ ALTER SEQUENCE public.sq_user_id
 
 -- Table: public.tb_usuario
 -- DROP TABLE public.tb_usuario;
-CREATE TABLE IF NOT EXISTS public.tb_usuario
+CREATE TABLE IF NOT EXISTS public.usuario
 (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nome text COLLATE pg_catalog."default" NOT NULL,
@@ -67,4 +67,5 @@ CREATE TRIGGER atualizar_data_usuario
     EXECUTE FUNCTION public.atualizar_alteracao_usuario();
 
 INSERT INTO public.tb_usuario (id, nome, cpf, sexo, email, senha, tipo, hash, ativo, criado, atualizado, id_user, id_user_atualizou) VALUES (
-'1'::bigint, 'Jackson Douglas de Souza'::text, '067.558.784-08'::text, 'Masculino'::text, 'jdsmax@gmail.com'::text, '$2a$10$gBz8EBjEORV7x1zgDJCVj.UW.GPC3jIpPGgjb0Tg3.bIWn8Ue.Mu6'::text, 'ROLE_ADMINISTRADOR'::text,'ttt'::text, 'Ativo'::text, '2022-12-28 23:30:00'::timestamp without time zone, '2022-12-28 23:30:00'::timestamp without time zone, '1'::bigint, '1'::bigint);
+'1'::bigint, 'Jackson Douglas de Souza'::text, '067.558.784-08'::text, 'Masculino'::text, 'jdsmax@gmail.com'::text, '$2a$10$gBz8EBjEORV7x1zgDJCVj.UW.GPC3jIpPGgjb0Tg3.bIWn8Ue.Mu6'::text, 'ROLE_ADMINISTRADOR'::text,'ttt'::text, true, '2022-12-28 23:30:00'::timestamp without time zone, '2022-12-28 23:30:00'::timestamp without time zone, '1'::bigint, '1'::bigint);
+'1'::bigint, 'João Victor da Silva Santos'::text, '014.894.044-73'::text, 'Masculino'::text, 'joaovss1992@gmail.com'::text, '$2a$10$gBz8EBjEORV7x1zgDJCVj.UW.GPC3jIpPGgjb0Tg3.bIWn8Ue.Mu6'::text, 'ROLE_ADMINISTRADOR'::text,'ttt'::text, true, '2022-12-28 23:30:00'::timestamp without time zone, '2022-12-28 23:30:00'::timestamp without time zone, '1'::bigint, '1'::bigint);

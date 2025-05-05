@@ -11,14 +11,14 @@ $(document).ready(function(){
             path = pathTB;
         }
         var titulo = "Deseja realmente Atualizar o item selecionado?";
-        var url = "/residenciais/v1/"+servico+"/"+path+"?id="+id+"&servico="+servico;
+        var url = "/sorteio/v1/"+servico+"/"+path+"?id="+id+"&servico="+servico;
         var body = servico+ " : "+ descricao;
         modal_show(titulo, body, url, "post")
     });
     $(document).on('click','#srv-familiar',function(){
         var queryParam = $(this).data("param");
         var titulo = "Deseja realmente editar o cadastro do familiar selecionado?";
-        var url = "/residenciais/site/back/composicaofamiliar/atualizar/"+queryParam;
+        var url = "/sorteio/site/back/composicaofamiliar/atualizar/"+queryParam;
         var descricao = $(this).data("nome");
         var body = "Nome : "+ descricao;
         modal_show(titulo, body, url, "get")
@@ -26,7 +26,7 @@ $(document).ready(function(){
     $(document).on('click','#srv-remover-familiar',function(){
         var queryParam = $(this).data("param");
         var titulo = "Deseja realmente remover o cadastro do familiar selecionado?";
-        var url = "/residenciais/site/back/composicaofamiliar/remover/"+queryParam;
+        var url = "/sorteio/site/back/composicaofamiliar/remover/"+queryParam;
         var descricao = $(this).data("nome");
         var body = "Nome : "+ descricao;
         modal_show(titulo, body, url, "get")
@@ -39,7 +39,7 @@ $(document).ready(function(){
         var retorno = $(this).data("retorno");
         var usaRetorno = $(this).data("usaretorno");
         var titulo = "Deseja realmente realizar a operação selecionada para o item abaixo?";
-        var url = "/residenciais/v1/" + servico + endpoint;
+        var url = "/sorteio/v1/" + servico + endpoint;
         var body = servico+ " : "+ descricao;
         modal_message(titulo, body, url, retorno, metodo, usaRetorno);
     });

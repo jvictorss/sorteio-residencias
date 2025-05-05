@@ -39,7 +39,7 @@
                     <label for="uf" class="form-label">UF:</label>
                     <select class="form-select" th:errorclass="error" id="uf" name="uf" th:field="*{uf}" required>
                         <option value="" selected>Selecione uma opção</option>
-                        <option th:each="estado : ${T(gov.residenciais.enuns.EstadosEnum).values()}"
+                        <option th:each="estado : ${T(gov.sorteio.enuns.EstadosEnum).values()}"
                                 th:value="${estado}"
                                 th:text="${estado.descricao}">
                     </select>

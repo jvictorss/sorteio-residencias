@@ -25,7 +25,7 @@
                         <label for="tipoDeficiencia" class="form-label">Tipo de Deficiência:</label>
                         <select class="form-select" th:errorclass="error" id="tipoDeficiencia" name="tipoDeficiencia" th:field="*{tipoDeficiencia}" required>
                             <option value="">Selecione um opção</option>
-                            <option th:each="tipo : ${T(gov.residenciais.enuns.TipoDeficienciaEnum).values()}"
+                            <option th:each="tipo : ${T(gov.sorteio.enuns.TipoDeficienciaEnum).values()}"
                                     th:value="${tipo.name()}"
                                     th:text="${tipo.descricao}">
                         </select>
@@ -55,7 +55,7 @@
                         <label for="tipoDeficienciaDoFamiliar" class="form-label">Tipo de Deficiência do Familiar:</label>
                         <select class="form-select" th:errorclass="error" id="tipoDeficienciaDoFamiliar" name="tipoDeficienciaDoFamiliar" th:field="*{tipoDeficienciaDoFamiliar}" required>
                             <option value="">Selecione um opção</option>
-                            <option th:each="tipo : ${T(gov.residenciais.enuns.TipoDeficienciaEnum).values()}"
+                            <option th:each="tipo : ${T(gov.sorteio.enuns.TipoDeficienciaEnum).values()}"
                                     th:value="${tipo.name()}"
                                     th:text="${tipo.descricao}">
                         </select>
@@ -89,7 +89,7 @@
                     <label for="formaDeRemuneracao" class="form-label">Forma de Remuneração:</label>
                     <select class="form-select col-md-4" th:errorclass="error" id="formaDeRemuneracao" name="formaDeRemuneracao" th:field="*{formaDeRemuneracao}" required>
                         <option value="">Selecione uma opção</option>
-                        <option th:each="forma : ${T(gov.residenciais.enuns.FormaDeRemuneracaoEnum).values()}"
+                        <option th:each="forma : ${T(gov.sorteio.enuns.FormaDeRemuneracaoEnum).values()}"
                                 th:value="${forma.name()}"
                                 th:text="${forma.descricao}">
                     </select>
@@ -152,7 +152,7 @@
                         <label for="DeficitHabitacional" class="form-label">Déficit Habitacional:</label>
                         <select class="form-select" th:errorclass="error" id="DeficitHabitacional" name="DeficitHabitacional" th:field="*{DeficitHabitacional}" required>
                             <option value="">Selecione um opção</option>
-                            <option th:each="tipo : ${T(gov.residenciais.enuns.DeficitsHabitacionaisEnum).values()}"
+                            <option th:each="tipo : ${T(gov.sorteio.enuns.DeficitsHabitacionaisEnum).values()}"
                                     th:value="${tipo.name()}"
                                     th:text="${tipo.descricao}">
                         </select>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Em qual grupo pretende concorrer?</label>
-                    <div class="form-check"  th:each="grupo, stat : ${T(gov.residenciais.enuns.DestinacaoExclusivaEnum).values()}">
+                    <div class="form-check"  th:each="grupo, stat : ${T(gov.sorteio.enuns.DestinacaoExclusivaEnum).values()}">
                         <input class="form-check-input" th:errorclass="error" type="radio" name="destinacaoExclusiva" th:id="'destinacaoExclusiva'+${stat.index+1}" th:value="${grupo.name()}" th:checked="*{destinacaoExclusiva} == ${grupo} ? 'checked' : ''" th:field="*{destinacaoExclusiva}" required>
                         <label class="form-check-label" th:for="'destinacaoExclusiva'+${stat.index+1}" th:text="${grupo.descricao}"></label>
                     </div>

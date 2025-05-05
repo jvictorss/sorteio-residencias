@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "usuario")
 @SequenceGenerator(
         name = "sq_user_id",
         sequenceName = "sq_user_id",

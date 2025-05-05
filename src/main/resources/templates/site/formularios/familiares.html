@@ -55,7 +55,7 @@
                             <label for="grauParentesco" class="form-label">Grau de Parentesco:</label>
                             <select class="form-select" th:errorclass="error" id="grauParentesco" name="grauParentesco" th:field="*{grauParentesco}" required>
                                 <option value="" selected>Selecione uma opção</option>
-                                <option th:each="parentesco : ${T(gov.residenciais.enuns.GrauParentescoEnum).values()}"
+                                <option th:each="parentesco : ${T(gov.sorteio.enuns.GrauParentescoEnum).values()}"
                                         th:value="${parentesco.name()}"
                                         th:text="${parentesco.descricao}">
                             </select>
