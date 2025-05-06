@@ -3,8 +3,9 @@ package gov.sorteio.controller;
 import gov.sorteio.bo.SorteioBO;
 import gov.sorteio.dto.NomeFormDto;
 import gov.sorteio.dto.RodapeDTO;
-import gov.sorteio.dto.SorteioRequest;
 import gov.sorteio.dto.SorteioFormDto;
+import gov.sorteio.dto.SorteioRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -23,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/v1/sorteio")
+@Slf4j
 public class SorteioController {
 
     @Autowired
@@ -71,7 +71,7 @@ public class SorteioController {
             sorteioDto.setParticipantes(participantes);
 
             var sorteados = sorteioBO.realizarSorteio(sorteioDto);
-            System.out.println("Sorteados: " + sorteados);
+            log.info("Sorteados: {}", sorteados);
             model.addAttribute("mensagemSucesso", "Sorteio realizado com sucesso!");
             model.addAttribute("sorteados", sorteados);
             return "/modulos/sortear/sorteio_concluido";

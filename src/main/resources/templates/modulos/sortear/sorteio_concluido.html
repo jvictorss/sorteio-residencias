@@ -17,7 +17,7 @@
             <section>
                 <div class="block_shodow">
                     <h3 class="text-center text_topo"
-                        th:text="'Resultado do sorteio ' + ${sorteados[0].sorteio} + ' realizado em ' + ${sorteados[0].horaSorteio} + ':'">
+                        th:text="'Resultado do sorteio ' + ${sorteados.getSorteio()} + ' realizado em ' + ${sorteados.getHoraSorteio()} + ':'">
                     </h3>
                     <div style="text-align: center;">
                         <p>Contemplados:</p>
@@ -29,9 +29,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="sorteado : ${sorteados}">
-                                    <td style="padding: 8px;" th:text="${sorteado.nome}"></td>
-                                    <td style="padding: 8px;" th:text="${sorteado.cpf}"></td>
+                                <tr th:each="participante : ${sorteados.participantes}">
+                                    <td style="padding: 8px;" th:text="${participante.nome}"></td>
+                                    <td style="padding: 8px;" th:text="${participante.cpf}"></td>
                                 </tr>
                             </tbody>
                         </table>

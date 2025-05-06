@@ -1,24 +1,22 @@
 package gov.sorteio.bo;
 
+import gov.sorteio.dto.ResultadoResponse;
 import gov.sorteio.dto.SorteioFormDto;
 import gov.sorteio.entity.ParticipanteEntity;
 import gov.sorteio.entity.SorteadoEntity;
 import gov.sorteio.entity.Sorteio;
 import gov.sorteio.entity.UsuarioEntity;
+import gov.sorteio.mapper.SorteioMapper;
 import gov.sorteio.repository.ParticipanteRepository;
 import gov.sorteio.repository.SorteadoRepository;
 import gov.sorteio.repository.SorteioRepository;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,8 +32,9 @@ public class SorteioBO {
     @Autowired
     private SorteadoRepository sorteadoRepository;
 
+
     @Transactional
-    public List<SorteadoEntity> realizarSorteio(SorteioFormDto sorteioFormDto) {
+    public ResultadoResponse realizarSorteio(SorteioFormDto sorteioFormDto) {
         var data = LocalDateTime.now();
         var nomeSorteio = sorteioFormDto.getSorteio();
         var quantidadeSorteados = sorteioFormDto.getQuantidadeSorteio();
@@ -61,7 +60,7 @@ public class SorteioBO {
             sorteadosEntities.add(sorteadoEntity);
         });
 
-        return sorteadosEntities;
+        return SorteioMapper.toResponse(sorteadosEntities);
     }
 
     @Transactional

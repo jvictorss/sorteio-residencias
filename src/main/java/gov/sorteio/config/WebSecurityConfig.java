@@ -11,11 +11,9 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -77,7 +75,7 @@ public class WebSecurityConfig {
                 // Submit URL of login page.
                 .loginProcessingUrl("/v1/j_spring_security_check") // Submit URL
                 .loginPage("/v1/login")
-                .defaultSuccessUrl("/v1/sorteio/",true)
+                .defaultSuccessUrl("/v1/painel",true)
                 .permitAll()
                 .failureUrl("/v1/login?exception")
                 .failureHandler(authenticationFailureHandler())

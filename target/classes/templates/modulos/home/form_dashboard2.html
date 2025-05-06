@@ -6,61 +6,57 @@
       th:replace="base/fragments/index :: index(~{::section})">
 <head></head>
 <body>
-    <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
-    <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
-    <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
-    <section>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-            </ol>
-        </nav>
-        <div class="card">
-            <div class="card-body">
-                <div class="card bg-transparent shadow-none border-0 my-4">
-                    <div class="card-body row p-0 pb-3">
-                        <div class="col-12 col-md-8 card-separator border-0">
-                            <h3>Bem <span th:text="${(#authentication.getPrincipal().getSexo() == 'Masculino')?'vindo' : 'vinda'}"></span>,
-                                <span th:with="strarray=${#strings.arraySplit(#authentication.getPrincipal().getNome(),' ')}" th:text="${strarray[0]+' '+strarray[1]}"></span> 👋🏻</h3>
-                            <div class="col-12 col-lg-7">
-                                <p>Abaixo está um resumo.</p>
-                            </div>
-                            <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
-                                <div class="d-flex align-items-center gap-3 me-4 me-sm-0">
+<section>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </nav>
+    <div class="card">
+        <div class="card-body">
+            <div class="card bg-transparent shadow-none border-0 my-4">
+                <div class="card-body row p-0 pb-3">
+                    <div class="col-12 col-md-8 card-separator border-0">
+                        <h3>Bem-<span th:text="${(#authentication.getPrincipal().getSexo() == 'Masculino')?'vindo' : 'vinda'}"></span>,
+                            <span th:with="strarray=${#strings.arraySplit(#authentication.getPrincipal().getNome(),' ')}" th:text="${strarray[0]+' '+strarray[1]}"></span> 👋🏻</h3>
+                        <div class="col-12 col-lg-7">
+                            <p>Abaixo está um resumo.</p>
+                        </div>
+                        <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
+                            <div class="d-flex align-items-center gap-3 me-4 me-sm-0">
                                     <span class=" bg-primary p-2 rounded">
                                         <i class="fa-solid fa-table-list"></i>
                                     </span>
-                                    <div class="content-right">
-                                        <p class="mb-0">Catalogadas</p>
-                                        <h4 class="text-primary mb-0" th:text="${estatistico.total}"></h4>
-                                    </div>
+                                <div class="content-right">
+                                    <p class="mb-0">Catalogadas</p>
+                                    <h4 class="text-primary mb-0" th:text="${estatistico.total}"></h4>
                                 </div>
-                                <div class="d-flex align-items-center gap-3">
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
                                     <span class="bg-warning p-2 rounded">
                                         <i class="fa-solid fa-file-pen"></i>
                                     </span>
-                                    <div class="content-right">
-                                        <p class="mb-0">Reserva Técnica</p>
-                                        <h4 class="text-warning mb-0" th:text="${estatistico.reserva}"></h4>
-                                    </div>
+                                <div class="content-right">
+                                    <p class="mb-0">Reserva Técnica</p>
+                                    <h4 class="text-warning mb-0" th:text="${estatistico.reserva}"></h4>
                                 </div>
-                                <div class="d-flex align-items-center gap-3">
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
                                     <span class="bg-success p-2 rounded">
                                         <i class="fa-solid fa-recycle"></i>
                                     </span>
-                                    <div class="content-right">
-                                        <p class="mb-0">Em Restauração</p>
-                                        <h4 class="text-success mb-0" th:text="${estatistico.restaurando}"></h4>
-                                    </div>
+                                <div class="content-right">
+                                    <p class="mb-0">Em Restauração</p>
+                                    <h4 class="text-success mb-0" th:text="${estatistico.restaurando}"></h4>
                                 </div>
-                                <div class="d-flex align-items-center gap-3">
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
                                     <span class="bg-danger p-2 rounded">
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                     </span>
-                                    <div class="content-right">
-                                        <p class="mb-0">Extraviada</p>
-                                        <h4 class="text-danger mb-0" th:text="${estatistico.extraviada}"></h4>
-                                    </div>
+                                <div class="content-right">
+                                    <p class="mb-0">Extraviada</p>
+                                    <h4 class="text-danger mb-0" th:text="${estatistico.extraviada}"></h4>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +64,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </body>
 </html>
