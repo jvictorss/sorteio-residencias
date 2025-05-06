@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(path = "/v1/usuario")
-public class UsuarioController extends BaseController<UsuarioEntity, Long>{
+public class UsuarioController extends BaseController<UsuarioEntity, Long> {
+
     private final UsuarioBO usuarioBO;
 
     @Autowired
@@ -45,13 +47,13 @@ public class UsuarioController extends BaseController<UsuarioEntity, Long>{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UsuarioEntity user = (UsuarioEntity) auth.getPrincipal();
         model.addAttribute("userInfo", user);
-        model.addAttribute("mudarUrl",true);
-        if("ROLE_ADMINISTRADOR".equals(user.getTipo())){
-            model.addAttribute("path",2);
-            model.addAttribute("path2",1);
-            model.addAttribute("editFNC",true);
-        }else{
-            model.addAttribute("path",0);
+        model.addAttribute("mudarUrl", true);
+        if ("ROLE_ADMINISTRADOR".equals(user.getTipo())) {
+            model.addAttribute("path", 2);
+            model.addAttribute("path2", 1);
+            model.addAttribute("editFNC", true);
+        } else {
+            model.addAttribute("path", 0);
         }
         model.addAttribute("usuario", baseBO.getObjectEntity(user.getId()));
         return "/modulos/usuario/form_usuario";
@@ -59,13 +61,13 @@ public class UsuarioController extends BaseController<UsuarioEntity, Long>{
 
     @PostMapping(value = "/senha")
     @ResponseBody
-    public String alterarSenha(@Valid SenhaDTO senhaDTO){
+    public String alterarSenha(@Valid SenhaDTO senhaDTO) {
         return usuarioBO.alterarSenha(senhaDTO);
     }
 
     @PostMapping(value = "/recuperar")
     @ResponseBody
-    public String recuperarSenha(@NotNull String email, HttpSession session){
+    public String recuperarSenha(@NotNull String email, HttpSession session) {
         return usuarioBO.recuperarLogin(email, session);
     }
 }

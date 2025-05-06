@@ -1,9 +1,8 @@
 package gov.sorteio.repository;
 
+import gov.sorteio.entity.SorteadoEntity;
 import gov.sorteio.entity.Sorteio;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface SorteioRepository extends CrudRepository<Sorteio, UUID> {
+public interface SorteioRepository extends JpaRepository<Sorteio, Long> {
 }

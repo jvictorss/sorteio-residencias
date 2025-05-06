@@ -32,6 +32,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import static gov.sorteio.constants.Constants.MSG_GENERIC;
 import static gov.sorteio.constants.Constants.MSG_OBJ_DUPLICADO;

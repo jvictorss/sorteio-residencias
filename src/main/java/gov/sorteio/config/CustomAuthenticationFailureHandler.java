@@ -22,6 +22,6 @@ public class CustomAuthenticationFailureHandler
             throws IOException {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.sendRedirect("/sorteio/v1/login/error");
+        response.sendRedirect("/v1/login/error");
     }
 }

@@ -11,6 +11,9 @@
 <div class="container_block">
     <th:block th:replace="base/fragments/topbar :: topbar-time"></th:block>
     <th:block th:replace="base/modal/modal :: modal"></th:block>
+    <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+    <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+    <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
     <div class="block_center">
         <section>
             <form th:action="@{/v1/j_spring_security_check}" name="validate_login" id="validate_login" method="post" class="block_shodow">

@@ -12,37 +12,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "nome")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Nome {
+@Table(name = "participante",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"cpf", "sorteio"})
+        })
+public class ParticipanteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, unique = true, nullable = false)
     private UUID id;
 
     @Column(nullable = false)
     private String nome;
 
-    public UUID getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String cpf;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    @Column(nullable = false)
+    private String sorteio;
 
-    public String getNome() {
-        return nome;
-    }
+    @Column(nullable = false)
+    private LocalDateTime horaCriacao;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    @Column(nullable = false)
+    private Long usuarioId;
+
+    @Column(nullable = false)
+    private String nomeUsuario;
 }

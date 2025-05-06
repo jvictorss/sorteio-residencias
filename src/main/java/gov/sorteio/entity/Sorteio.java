@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -29,43 +30,20 @@ public class Sorteio {
     private UUID id;
 
     @Column(nullable = false)
-    private String nomeSorteado;
+    private Integer quantidadeSorteada;
+
+    @Column(nullable = false)
+    private Integer quantidadeParticipantes;
+
+    @Column(nullable = false)
+    private String nomeSorteio;
 
     @Column(nullable = false)
     private LocalDateTime dataSorteio;
 
     @Column(nullable = false)
-    private UUID usuarioId;
+    private Long usuarioId;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNomeSorteado() {
-        return nomeSorteado;
-    }
-
-    public void setNomeSorteado(String nomeSorteado) {
-        this.nomeSorteado = nomeSorteado;
-    }
-
-    public LocalDateTime getDataSorteio() {
-        return dataSorteio;
-    }
-
-    public void setDataSorteio(LocalDateTime dataSorteio) {
-        this.dataSorteio = dataSorteio;
-    }
-
-    public UUID getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(UUID usuarioId) {
-        this.usuarioId = usuarioId;
-    }
+    @Column(nullable = false)
+    private String nomeUsuario;
 }

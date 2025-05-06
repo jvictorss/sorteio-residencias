@@ -9,6 +9,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.UUID;
 
 @NoRepositoryBean
 public interface BaseRepository<T extends BaseEntity, ID extends Serializable>

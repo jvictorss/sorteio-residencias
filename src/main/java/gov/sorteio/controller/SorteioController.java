@@ -1,64 +1,84 @@
 package gov.sorteio.controller;
+
+import gov.sorteio.bo.SorteioBO;
 import gov.sorteio.dto.NomeFormDto;
-import gov.sorteio.dto.SorteioDto;
+import gov.sorteio.dto.RodapeDTO;
+import gov.sorteio.dto.SorteioRequest;
+import gov.sorteio.dto.SorteioFormDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 @Controller
+@RequestMapping("/v1/sorteio")
 public class SorteioController {
 
-    private final List<SorteioDto> historico = new ArrayList<>();
-    private String nomeSorteado = null;
+    @Autowired
+    private SorteioBO sorteioBO;
+
+    private final List<SorteioRequest> historico = new ArrayList<>();
+    @Autowired
+    private RodapeDTO rodapeDTO;
 
     @GetMapping("/")
-    public String exibirFormulario(Model model) {
-        model.addAttribute("nomeFormDto", new NomeFormDto());
+    public String exibirFormulario(HttpSession session, Model model) {
+        session.setAttribute("rodape", rodapeDTO);
+        model.addAttribute("theme", "core2.css");
+        model.addAttribute("themeBord", "theme-default.css");
+        model.addAttribute("sorteioForm", new SorteioFormDto());
         model.addAttribute("historico", historico);
-        model.addAttribute("nomeSorteado", nomeSorteado);
-        return "/modulos/sorteio";
+        return "/modulos/sortear/sortear";
     }
 
     @PostMapping("/sortear")
-    public String sortearNome(@Valid @ModelAttribute("nomeForm") NomeFormDto nomeFormDto, BindingResult bindingResult, Model model) {
+    public String sortear(@Valid @ModelAttribute("sorteioForm") SorteioRequest sorteioRequest, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("historico", historico);
-            model.addAttribute("nomeSorteado", nomeSorteado);
-            return "/modulos/sorteio";
+            model.addAttribute("mensagemErro", "Erro nos dados do formulário");
+            return "/modulos/sortear/sortear";
         }
 
-        List<String> nomesList = Arrays.asList(nomeFormDto.getNomes().split("\\r\\n|\\r|\\n"));
-        if (!nomesList.isEmpty()) {
-            sortear(nomesList);
-        } else {
-            model.addAttribute("mensagemErro", "A lista de nomes está vazia.");
-        }
-        NomeFormDto newForm = new NomeFormDto();
-        newForm.setNomes(nomeFormDto.getNomes().replaceAll(nomeSorteado.concat("\\r\\n"),""));
-        model.addAttribute("historico", historico);
-        model.addAttribute("nomeSorteado", nomeSorteado);
-        model.addAttribute("nomeForm", newForm);
-        return "/modulos/sorteio";
-    }
+        try {
+            List<NomeFormDto> participantes = new ArrayList<>();
+            for (String linha : sorteioRequest.getParticipantes().split("\\n")) {
+                String[] dados = linha.split(",");
+                if (dados.length == 2) {
+                    NomeFormDto participante = new NomeFormDto();
+                    participante.setNome(dados[0].trim());
+                    participante.setCpf(dados[1].trim());
+                    participantes.add(participante);
+                } else {
+                    model.addAttribute("mensagemErro", "Formato inválido na lista de participantes. Cada linha deve conter 'Nome,CPF'.");
+                    return "/modulos/sortear/sortear";
+                }
+            }
 
-    private void sortear(List<String> nomesList) {
-        Random random = new Random();
-        int indiceSorteado = random.nextInt(nomesList.size());
-        nomeSorteado = nomesList.get(indiceSorteado).trim();
-        if(historico.stream().noneMatch(sorteioDto -> sorteioDto.getNomeSorteado().equalsIgnoreCase(nomeSorteado))){
-            historico.add(new SorteioDto(nomeSorteado, LocalDateTime.now()));
-            return;
+            var sorteioDto = new SorteioFormDto();
+            sorteioDto.setQuantidadeSorteio(sorteioRequest.getQuantidadeSorteio());
+            sorteioDto.setSorteio(sorteioRequest.getSorteio());
+
+            sorteioDto.setParticipantes(participantes);
+
+            var sorteados = sorteioBO.realizarSorteio(sorteioDto);
+            System.out.println("Sorteados: " + sorteados);
+            model.addAttribute("mensagemSucesso", "Sorteio realizado com sucesso!");
+            model.addAttribute("sorteados", sorteados);
+            return "/modulos/sortear/sorteio_concluido";
+        } catch (Exception e) {
+            model.addAttribute("mensagemErro", "Erro ao realizar o sorteio: " + e.getMessage());
         }
-        sortear(nomesList);
+
+        return "/modulos/sortear/sortear";
     }
 }

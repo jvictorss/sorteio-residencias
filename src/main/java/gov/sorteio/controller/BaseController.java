@@ -111,7 +111,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
     @PostMapping(path = "/inativar")
     @ResponseBody
-    public ResponseEntity<Void> inativarAluno(@RequestParam("id") @NotNull ID id,
+    public ResponseEntity<Void> inativar(@RequestParam("id") @NotNull ID id,
                                               @RequestParam("acao") @NotNull Boolean acao,
                                               HttpSession session) throws Exception {
         baseBO.inativarObject(id, acao);

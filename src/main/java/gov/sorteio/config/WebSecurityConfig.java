@@ -77,7 +77,7 @@ public class WebSecurityConfig {
                 // Submit URL of login page.
                 .loginProcessingUrl("/v1/j_spring_security_check") // Submit URL
                 .loginPage("/v1/login")
-                .defaultSuccessUrl("/v1/painel",true)
+                .defaultSuccessUrl("/v1/sorteio/",true)
                 .permitAll()
                 .failureUrl("/v1/login?exception")
                 .failureHandler(authenticationFailureHandler())

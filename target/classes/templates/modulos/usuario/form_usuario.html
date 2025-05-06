@@ -6,6 +6,9 @@
       th:replace="base/fragments/index :: index(~{::section})">
     <head></head>
     <body>
+    <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+    <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+    <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
     <section>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

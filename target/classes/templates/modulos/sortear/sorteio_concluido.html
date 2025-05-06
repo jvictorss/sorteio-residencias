@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+      <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="https://www.thymeleaf.org"
+          xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      <head>
+        <th:block th:replace="base/fragments/head :: head-css-tag"></th:block>
+        <th:block th:replace="base/fragments/head :: head-css-all"></th:block>
+      </head>
+      <body>
+      <div class="container_block">
+        <th:block th:replace="base/fragments/topbar :: topbar-time"></th:block>
+        <th:block th:replace="base/modal/modal :: modal"></th:block>
+        <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+        <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+        <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+        <div class="block_center">
+            <section>
+                <div class="block_shodow">
+                    <h3 class="text-center text_topo"
+                        th:text="'Resultado do sorteio ' + ${sorteados[0].sorteio} + ' realizado em ' + ${sorteados[0].horaSorteio} + ':'">
+                    </h3>
+                    <div style="text-align: center;">
+                        <p>Contemplados:</p>
+                        <table style="margin: 0 auto; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 8px;">Nome</th>
+                                    <th style="padding: 8px;">CPF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="sorteado : ${sorteados}">
+                                    <td style="padding: 8px;" th:text="${sorteado.nome}"></td>
+                                    <td style="padding: 8px;" th:text="${sorteado.cpf}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pt-3">
+                            <a class="btn btn-primary" href="/sorteio/v1/sorteio/">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div th:replace="base/fragments/footer_principal :: footer"/>
+      </div>
+      <div th:replace="base/fragments/head :: head-js-base"/>
+      <th:block th:replace="base/fragments/mensagens"></th:block>
+      </body>
+      </html>

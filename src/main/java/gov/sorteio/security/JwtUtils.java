@@ -1,6 +1,6 @@
 package gov.sorteio.security;
 
-import gov.sorteio.entity.ColaboradorEntity;
+import gov.sorteio.entity.UsuarioEntity;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -26,7 +26,7 @@ public class JwtUtils {
     @Value("${app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(ColaboradorEntity userPrincipal) {
+    public String generateJwtToken(UsuarioEntity userPrincipal) {
 
         Map<String,Object> map = new HashMap<>();
         map.put("id",userPrincipal.getId());
