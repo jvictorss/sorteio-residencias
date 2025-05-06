@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Controller
 @RequestMapping(path = "/v1/usuario")
