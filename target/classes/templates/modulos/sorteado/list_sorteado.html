@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+<span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+<link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+<link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+<section>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/painel}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Usuários</li>
+        </ol>
+    </nav>
+    <a class="mb-3 btn btn-primary p-2" sec:authorize="hasAnyRole('ADMINISTRADOR')" th:href="@{/v1/painel/sorteado/form}">Novo Cadastro</a>
+    <div class="card">
+        <div class="card-header">Listagem de Sorteados por Sorteio</div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered responsive nowrap" id="sorteado" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Nome Sorteado</th>
+                    <th>Cpf</th>
+                    <th>Sorteio</th>
+                    <th>Data e Hora</th>
+                    <th>Usuário que realizou</th>
+                    <!--                    <th>Status</th>-->
+                    <!--                    <th>Ações</th>-->
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div th:replace="base/table/sorteado"/>
+</section>
+</body>
+</html>

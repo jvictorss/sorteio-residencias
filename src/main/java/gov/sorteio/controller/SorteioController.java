@@ -1,5 +1,6 @@
 package gov.sorteio.controller;
 
+import gov.sorteio.bo.LotteryBO;
 import gov.sorteio.bo.SorteioBO;
 import gov.sorteio.dto.NomeFormDto;
 import gov.sorteio.dto.RodapeDTO;
@@ -27,6 +28,8 @@ public class SorteioController {
 
     @Autowired
     private SorteioBO sorteioBO;
+    @Autowired
+    private LotteryBO lotteryBO;
 
     private final List<SorteioRequest> historico = new ArrayList<>();
     @Autowired
@@ -70,7 +73,8 @@ public class SorteioController {
 
             sorteioDto.setParticipantes(participantes);
 
-            var sorteados = sorteioBO.realizarSorteio(sorteioDto);
+//            var sorteados = sorteioBO.realizarSorteio(sorteioDto);
+            var sorteados = lotteryBO.realizarSorteio(sorteioDto);
             log.info("Sorteados: {}", sorteados);
             model.addAttribute("mensagemSucesso", "Sorteio realizado com sucesso!");
             model.addAttribute("sorteados", sorteados);

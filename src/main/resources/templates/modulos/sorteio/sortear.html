@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+<span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+<link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+<link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+
+<section>
+    <div class="container py-4">
+        <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <h3 class="text-center mb-4">Realizar Sorteio</h3>
+                <form th:action="@{/v1/sorteio/sortear}" th:object="${sorteioForm}" method="post">
+                    <div class="mb-3">
+                        <label for="sorteio" class="form-label">Título do Sorteio</label>
+                        <input type="text" class="form-control" id="sorteio" th:field="*{sorteio}" placeholder="Digite o título do sorteio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantidadeSorteio" class="form-label">Quantidade de Sorteados</label>
+                        <input type="number" class="form-control" id="quantidadeSorteio" th:field="*{quantidadeSorteio}" placeholder="Digite a quantidade" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="participantes" class="form-label">Lista de Participantes</label>
+                        <textarea class="form-control" id="participantes" th:field="*{participantes}" rows="5" placeholder="Exemplo: Fulano, 12345678900"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Realizar Sorteio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="base/fragments/head :: head-js-base-envio"/>
+</body>
+</html>

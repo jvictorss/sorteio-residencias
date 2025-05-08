@@ -15,13 +15,14 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "sorteio")
+@Table(name = "lottery")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Sorteio extends BaseEntity {
+public class LotteryEntity extends BaseEntity {
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "uuid", updatable = false, unique = true, nullable = false)
     private UUID uuid;
@@ -40,4 +41,7 @@ public class Sorteio extends BaseEntity {
 
     @Column(nullable = false)
     private String nomeUsuario;
+
+    @Column(nullable = false)
+    private String sorteados;
 }

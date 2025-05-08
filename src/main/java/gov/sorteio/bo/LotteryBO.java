@@ -2,11 +2,14 @@ package gov.sorteio.bo;
 
 import gov.sorteio.dto.ResultadoResponse;
 import gov.sorteio.dto.SorteioFormDto;
+import gov.sorteio.entity.LotteryEntity;
 import gov.sorteio.entity.ParticipanteEntity;
 import gov.sorteio.entity.SorteadoEntity;
 import gov.sorteio.entity.Sorteio;
 import gov.sorteio.entity.UsuarioEntity;
 import gov.sorteio.mapper.SorteioMapper;
+import gov.sorteio.repository.BaseRepository;
+import gov.sorteio.repository.LotteryRepository;
 import gov.sorteio.repository.ParticipanteRepository;
 import gov.sorteio.repository.SorteadoRepository;
 import gov.sorteio.repository.SorteioRepository;
@@ -20,14 +23,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
-public class SorteioBO {
+public class LotteryBO extends BaseBO<LotteryEntity, Long>{
+
+
+    public LotteryBO(BaseRepository<LotteryEntity, Long> baseRepository) {
+        super(baseRepository);
+    }
+
     @Autowired
     private ParticipanteRepository participanteRepository;
 
     @Autowired
-    private SorteioRepository sorteioRepository;
+    private LotteryRepository lotteryRepository;
 
     @Autowired
     private SorteadoRepository sorteadoRepository;
@@ -40,8 +50,6 @@ public class SorteioBO {
         var quantidadeSorteados = sorteioFormDto.getQuantidadeSorteio();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UsuarioEntity user = (UsuarioEntity) auth.getPrincipal();
-
-        saveSorteio(sorteioFormDto, data, nomeSorteio, user, quantidadeSorteados);
 
         var participantes = saveParticipantes(sorteioFormDto, user);
 
@@ -60,7 +68,9 @@ public class SorteioBO {
             sorteadosEntities.add(sorteadoEntity);
         });
 
-        return SorteioMapper.toResponse(sorteadosEntities);
+        List<SorteadoEntity> resultado = saveSorteio(sorteioFormDto, data, nomeSorteio, user, quantidadeSorteados, sorteadosEntities);
+
+        return SorteioMapper.toResponse(resultado);
     }
 
     @Transactional
@@ -80,18 +90,35 @@ public class SorteioBO {
         return participantesSalvos;
     }
 
-    @Transactional
-    public void saveSorteio(SorteioFormDto sorteioFormDto, LocalDateTime data, String nomeSorteio, UsuarioEntity user, Integer quantidadeSorteados) {
-        var sorteio = new Sorteio();
-        sorteio.setDataSorteio(data);
-        sorteio.setNomeSorteio(nomeSorteio);
-        sorteio.setIdUser(user.getId());
-        sorteio.setIdUserAtualizou(user.getId());
-        sorteio.setNomeUsuario(user.getNome());
-        sorteio.setQuantidadeParticipantes(sorteioFormDto.getParticipantes().size());
-        sorteio.setQuantidadeSorteada(quantidadeSorteados);
-        sorteioRepository.save(sorteio);
-    }
+   @Transactional
+   public List<SorteadoEntity> saveSorteio(SorteioFormDto sorteioFormDto, LocalDateTime data, String nomeSorteio, UsuarioEntity user, Integer quantidadeSorteados, List<SorteadoEntity> sorteados) {
+       var sorteio = new LotteryEntity();
+       var resultado = sorteados;
+       sorteio.setDataSorteio(data);
+
+       StringBuilder sorteadosStr = new StringBuilder();
+       sorteados.forEach(sorteado -> {
+           if (sorteadosStr.length() > 0) {
+               sorteadosStr.append(", ");
+           }
+           sorteadosStr.append(sorteado.getNome()).append(" - ").append(sorteado.getCpf());
+       });
+       sorteio.setSorteados(sorteadosStr.toString());
+
+       sorteio.setNomeSorteio(nomeSorteio);
+       sorteio.setUuid(UUID.randomUUID());
+       sorteio.setIdUser(user.getId());
+       sorteio.setIdUserAtualizou(user.getId());
+       sorteio.setNomeUsuario(user.getNome());
+       sorteio.setQuantidadeParticipantes(sorteioFormDto.getParticipantes().size());
+       sorteio.setQuantidadeSorteada(quantidadeSorteados);
+       sorteio.setAtivo(true);
+       sorteio.setCriado(data);
+       sorteio.setAtualizado(data);
+       lotteryRepository.save(sorteio);
+
+       return resultado;
+   }
 
     private List<ParticipanteEntity> sortearParticipantes(List<ParticipanteEntity> participantes, int quantidade) {
         Random random = new Random();

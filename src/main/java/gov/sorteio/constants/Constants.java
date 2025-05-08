@@ -1,5 +1,7 @@
 package gov.sorteio.constants;
 
+import gov.sorteio.entity.LotteryEntity;
+import gov.sorteio.entity.SorteadoEntity;
 import gov.sorteio.entity.UsuarioEntity;
 import org.springframework.stereotype.Component;
 
@@ -29,10 +31,14 @@ public class Constants {
         SERVICO_CODIGOS.put("resumo", 5);
 
         entidades.put("usuario", new UsuarioEntity());
+        entidades.put("sorteado", new SorteadoEntity());
+        entidades.put("lottery", new LotteryEntity());
 
         listModels.put("cidadao","cidadaos");
 
         pathPai.put("cidadao", 2);
         pathPai.put("usuario", 3);
+        pathPai.put("sorteado", 4);
+        pathPai.put("lottery", 5);
     }
 }
